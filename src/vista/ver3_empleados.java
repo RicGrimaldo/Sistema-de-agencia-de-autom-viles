@@ -5,6 +5,8 @@
  */
 package vista;
 
+import Tablas.TablaMecanico;
+
 /**
  *
  * @author asha2
@@ -14,10 +16,17 @@ public class ver3_empleados extends javax.swing.JFrame {
     /**
      * Creates new form ver3_empleados
      */
+    public TablaMecanico modelo = new TablaMecanico();
     public ver3_empleados() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
+        inicializarTabla();
     }
+    
+    public void inicializarTabla(){
+        modelo.iniciarTabla(this.TablaMecanico);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

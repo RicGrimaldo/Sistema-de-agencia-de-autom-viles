@@ -5,6 +5,12 @@
  */
 package vista;
 
+import Modelo.Empleado;
+import Modelo.Mecanico;
+import Modelo.Vendedor;
+import interfaz_proyectofinal.Interfaz_Proyectofinal;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author asha2
@@ -16,6 +22,20 @@ public class nuevo3_empleado extends javax.swing.JFrame {
      */
     public nuevo3_empleado() {
         initComponents();
+        setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
+    }
+    
+    private void LimpiarCampos(){
+        this.txtClave.setText("");
+        this.txtNombre.setText("");
+        this.txtApellido.setText("");
+        this.txtDias.setText("");
+        this.txtSueldoBase.setText("");
+        this.txtPrestamo.setText("");
+        this.txtTasaDescuento.setText("");
+        this.txtVacaciones.setText("");
+        this.txtGratificaciones.setText("");
+        this.txtHrsExtra.setText("");               
     }
 
     /**
@@ -227,7 +247,34 @@ public class nuevo3_empleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        // TODO add your handling code here:
+        try{
+            String clave = this.txtClave.getText();
+            String nombre = this.txtNombre.getText();
+            String apellido = this.txtApellido.getText();
+            int dias = Integer.parseInt(this.txtDias.getText());
+            double sueldoBase = Double.parseDouble(this.txtSueldoBase.getText());
+            double prestamo = Double.parseDouble(this.txtPrestamo.getText());
+            double tasaDescInfona = Double.parseDouble(this.txtTasaDescuento.getText());
+            double vacaciones = Double.parseDouble(this.txtVacaciones.getText());
+            double gratific = Double.parseDouble(this.txtGratificaciones.getText());
+            int hrsExtra = Integer.parseInt(this.txtHrsExtra.getText());
+            
+
+            JOptionPane.showMessageDialog(this, "Mecánico "+nombre+" guardado con éxito.","Nuevo mecánico registrado.",JOptionPane.INFORMATION_MESSAGE);
+            this.LimpiarCampos();
+            
+            Empleado empleado = new Mecanico(clave,nombre,apellido,dias,sueldoBase,prestamo,tasaDescInfona,vacaciones,gratific,hrsExtra);
+            Interfaz_Proyectofinal.listaEmpleados.add(empleado);      
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otro empleado?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
+            if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
+                ventana_empleados Ventana_empleados = new ventana_empleados();
+                this.dispose();
+                Ventana_empleados.setVisible(true);
+            }//Cierra la ventana
+        }
+        catch(NumberFormatException e1){
+            JOptionPane.showMessageDialog(this, "Debe llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btGuardarActionPerformed
 
     /**
