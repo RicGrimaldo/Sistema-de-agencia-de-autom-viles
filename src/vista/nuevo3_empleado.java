@@ -273,7 +273,7 @@ public class nuevo3_empleado extends javax.swing.JFrame {
             }//Cierra la ventana
         }
         catch(NumberFormatException e1){
-            JOptionPane.showMessageDialog(this, "Debe llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btGuardarActionPerformed
 

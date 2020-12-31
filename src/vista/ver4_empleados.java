@@ -5,6 +5,8 @@
  */
 package vista;
 
+import Tablas.TablaMantenimiento;
+
 /**
  *
  * @author asha2
@@ -14,10 +16,18 @@ public class ver4_empleados extends javax.swing.JFrame {
     /**
      * Creates new form ver4_empleados
      */
+    public TablaMantenimiento modelo = new TablaMantenimiento();
     public ver4_empleados() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
+        inicializarTabla();
     }
+    
+    public void inicializarTabla(){
+        modelo.iniciarTabla(this.TablaMantenimiento);
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,7 +47,7 @@ public class ver4_empleados extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btEliminar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TablaLimpieza = new javax.swing.JTable();
+        TablaMantenimiento = new javax.swing.JTable();
         btModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -130,7 +140,7 @@ public class ver4_empleados extends javax.swing.JFrame {
 
         jScrollPane2.setBackground(new java.awt.Color(0, 0, 0));
 
-        TablaLimpieza.setModel(new javax.swing.table.DefaultTableModel(
+        TablaMantenimiento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -138,10 +148,10 @@ public class ver4_empleados extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Clave", "Nombre", "Apellido", "Días que labora", "Sueldo base", "Préstamo", "Horas extra", "Gratificaciones"
+                "Clave", "Nombre", "Apellido", "Días que labora", "Sueldo base", "Préstamo", "Gratificaciones", "Horas extra"
             }
         ));
-        jScrollPane2.setViewportView(TablaLimpieza);
+        jScrollPane2.setViewportView(TablaMantenimiento);
 
         btModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de Copia de Copia de Copia de Sin título (2).png"))); // NOI18N
         btModificar.setText("jButton5");
@@ -259,7 +269,7 @@ public class ver4_empleados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TablaLimpieza;
+    private javax.swing.JTable TablaMantenimiento;
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btEmpleados;
     private javax.swing.JButton btFacServicios;
