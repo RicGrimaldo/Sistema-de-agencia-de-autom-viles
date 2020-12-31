@@ -264,7 +264,7 @@ public class nuevo_empleado extends javax.swing.JFrame {
             double vacaciones = Double.parseDouble(this.txtVacaciones.getText());
             double gratific = Double.parseDouble(this.txtGratificaciones.getText());
 
-            JOptionPane.showMessageDialog(this, "Empleado "+nombre+" guardado con éxito.","Nuevo empleado administrativo.",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Administrativo "+nombre+" guardado con éxito.","Nuevo empleado administrativo.",JOptionPane.INFORMATION_MESSAGE);
             this.LimpiarCampos();
             
             Empleado empleado = new Administrativos(clave,nombre,apellido,dias,sueldoBase,prestamo,tasaDescInfona,vacaciones,gratific);

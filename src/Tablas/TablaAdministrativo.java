@@ -23,7 +23,7 @@ public class TablaAdministrativo {
         modelo.addColumn("Clave");
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
-        modelo.addColumn("Dias");
+        modelo.addColumn("Dias que labora");
         modelo.addColumn("Sueldo Base");
         modelo.addColumn("Préstamo");
         modelo.addColumn("Tasa de descuento");

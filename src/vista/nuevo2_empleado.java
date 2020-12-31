@@ -5,6 +5,11 @@
  */
 package vista;
 
+import Modelo.Empleado;
+import Modelo.Vendedor;
+import interfaz_proyectofinal.Interfaz_Proyectofinal;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author asha2
@@ -16,6 +21,7 @@ public class nuevo2_empleado extends javax.swing.JFrame {
      */
     public nuevo2_empleado() {
         initComponents();
+        setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
     }
 
     /**
@@ -124,9 +130,6 @@ public class nuevo2_empleado extends javax.swing.JFrame {
                             .addComponent(txtSueldoBase, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDias, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -139,8 +142,11 @@ public class nuevo2_empleado extends javax.swing.JFrame {
                             .addComponent(txtVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                             .addComponent(txtTarifaComision, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                             .addComponent(txtCochesVendidos)
-                            .addComponent(txtClave))
-                        .addContainerGap())))
+                            .addComponent(txtClave)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(133, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,8 +225,41 @@ public class nuevo2_empleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void LimpiarCampos(){
+        this.txtNombre.setText("");
+        this.txtApellido.setText("");
+        this.txtClave.setText("");
+        this.txtDias.setText("");
+        this.txtCochesVendidos.setText("");
+        this.txtPrestamo.setText("");
+        this.txtSueldoBase.setText("");
+        this.txtTarifaComision.setText("");
+        this.txtVentas.setText("");
+        this.txtTasaDescuento.setText("");
+    }
+    
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        // TODO add your handling code here:
+        try{
+            String clave = this.txtClave.getText();
+            String nombre = this.txtNombre.getText();
+            String apellido = this.txtApellido.getText();
+            int dias = Integer.parseInt(this.txtDias.getText());
+            double sueldoBase = Double.parseDouble(this.txtSueldoBase.getText());
+            double prestamo = Double.parseDouble(this.txtPrestamo.getText());
+            double tasaDescInfona = Double.parseDouble(this.txtTasaDescuento.getText());
+            double tarifaComision = Double.parseDouble(this.txtTarifaComision.getText());
+            double ventas = Double.parseDouble(this.txtVentas.getText());
+            int autosVendidos = Integer.parseInt(this.txtCochesVendidos.getText());
+
+            JOptionPane.showMessageDialog(this, "Vendedor "+nombre+" guardado con éxito.","Nuevo vendedor registrado.",JOptionPane.INFORMATION_MESSAGE);
+            this.LimpiarCampos();
+            
+            Empleado empleado = new Vendedor(clave,nombre,apellido,dias,sueldoBase,prestamo,tasaDescInfona,tarifaComision,ventas,autosVendidos);
+            Interfaz_Proyectofinal.listaEmpleados.add(empleado);                        
+        }
+        catch(NumberFormatException e1){
+            JOptionPane.showMessageDialog(this, "Debe llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btGuardarActionPerformed
 
     /**
