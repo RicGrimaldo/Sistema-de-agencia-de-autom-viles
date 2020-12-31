@@ -84,7 +84,7 @@ public class nuevo_empleado extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (8).png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (22).png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
