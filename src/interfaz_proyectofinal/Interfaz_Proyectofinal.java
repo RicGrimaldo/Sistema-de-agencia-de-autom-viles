@@ -5,6 +5,8 @@
  */
 package interfaz_proyectofinal;
 
+import Modelo.Empleado;
+import java.util.ArrayList;
 import vista.VistaPrincipal;
 
 /**
@@ -16,6 +18,8 @@ public class Interfaz_Proyectofinal {
     /**
      * @param args the command line arguments
      */
+    public static ArrayList<Empleado> listaEmpleados = new ArrayList<Empleado>();
+    
     public static void main(String[] args) {
         VistaPrincipal ventana = new VistaPrincipal();
         

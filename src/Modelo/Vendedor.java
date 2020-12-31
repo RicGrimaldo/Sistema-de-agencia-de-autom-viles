@@ -16,8 +16,8 @@ public class Vendedor extends EmpleadoConInfonavit{
     
     //Constructores 
 
-    public Vendedor(String nombre, String apellido, int dias, double sueldoBase, double prestamo, double tasaDescInfona, double tarifaComision, double ventasDelVendedor, int autosVendidos) {
-        super(nombre, apellido, dias, sueldoBase, prestamo, tasaDescInfona);
+    public Vendedor(String clave,String nombre, String apellido, int dias, double sueldoBase, double prestamo, double tasaDescInfona, double tarifaComision, double ventasDelVendedor, int autosVendidos) {
+        super(clave,nombre, apellido, dias, sueldoBase, prestamo, tasaDescInfona);
         this.tarifaComision = tarifaComision;
         this.ventasDelVendedor = ventasDelVendedor;
         this.autosVendidos = autosVendidos;

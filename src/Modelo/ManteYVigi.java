@@ -14,8 +14,8 @@ public class ManteYVigi extends Empleado{
     
     //Constructores
 
-    public ManteYVigi(String nombre, String apellido, int dias, double sueldoBase, double prestamo,double gratific) {
-        super(nombre, apellido, dias, sueldoBase, prestamo);
+    public ManteYVigi(String clave, String nombre, String apellido, int dias, double sueldoBase, double prestamo,double gratific) {
+        super(clave, nombre, apellido, dias, sueldoBase, prestamo);
         this.gratific = gratific;
     }
     public ManteYVigi(){

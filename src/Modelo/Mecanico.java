@@ -16,8 +16,8 @@ public class Mecanico extends EmpleadoConInfonavit{
     
     //Constructores
 
-    public Mecanico(String nombre, String apellido, int dias, double sueldoBase, double prestamo, double tasaDescInfona,double vacaciones, double gratific, int hrsExt) {
-        super(nombre, apellido, dias, sueldoBase, prestamo, tasaDescInfona);
+    public Mecanico(String clave, String nombre, String apellido, int dias, double sueldoBase, double prestamo, double tasaDescInfona,double vacaciones, double gratific, int hrsExt) {
+        super(clave,nombre, apellido, dias, sueldoBase, prestamo, tasaDescInfona);
         this.vacaciones = vacaciones;
         this.gratific = gratific;
         this.hrsExt = hrsExt;

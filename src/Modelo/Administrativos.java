@@ -15,8 +15,8 @@ public class Administrativos extends EmpleadoConInfonavit{
     
     //Costructores
 
-    public Administrativos(String nombre, String apellido, int dias, double sueldoBase, double prestamo, double tasaDescInfona, double vacaciones, double gratific) {
-        super(nombre, apellido, dias, sueldoBase, prestamo, tasaDescInfona);
+    public Administrativos(String clave,String nombre, String apellido, int dias, double sueldoBase, double prestamo, double tasaDescInfona, double vacaciones, double gratific) {
+        super(clave,nombre, apellido, dias, sueldoBase, prestamo, tasaDescInfona);
         this.vacaciones = vacaciones;
         this.gratific = gratific;
     }

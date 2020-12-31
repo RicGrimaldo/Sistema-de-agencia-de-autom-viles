@@ -14,8 +14,8 @@ public class Mantenimiento extends ManteYVigi{
     
     //Constructores
 
-    public Mantenimiento(String nombre, String apellido, int dias, double sueldoBase, double prestamo, double gratific,int hrsExt) {
-        super(nombre, apellido, dias, sueldoBase, prestamo, gratific);
+    public Mantenimiento(String clave, String nombre, String apellido, int dias, double sueldoBase, double prestamo, double gratific,int hrsExt) {
+        super(clave,nombre, apellido, dias, sueldoBase, prestamo, gratific);
         this.hrsExt = hrsExt;
     }
     public Mantenimiento(){

@@ -10,13 +10,15 @@ package Modelo;
  * @author jorge
  */
 public class FacturaServicio implements PorPagar{
+    private String clave;
     private String nombreServicio;
     private double montoPago;
     private double porcentajeExtra;
     
     //Constructores
 
-    public FacturaServicio(String nombreServicio, double montoPago, double porcentajeExtra) {
+    public FacturaServicio(String clave,String nombreServicio, double montoPago, double porcentajeExtra) {
+        this.clave = clave;
         this.nombreServicio = nombreServicio;
         this.montoPago = montoPago;
         this.porcentajeExtra = porcentajeExtra;
@@ -27,6 +29,10 @@ public class FacturaServicio implements PorPagar{
     
     //Métodos get
 
+    public String getClave() {
+        return clave;
+    }    
+    
     public String getNombreServicio() {
         return nombreServicio;
     }
@@ -40,6 +46,10 @@ public class FacturaServicio implements PorPagar{
     }
     
     //Métodos set
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }    
 
     public void setNombreServicio(String nombreServicio) {
         this.nombreServicio = nombreServicio;
@@ -61,6 +71,6 @@ public class FacturaServicio implements PorPagar{
         
     @Override
     public String toString(){
-        return getNombreServicio()+" "+getMontoPago()+" "+getPorcentajeExtra();
+        return getClave() + " " +getNombreServicio()+" "+getMontoPago()+" "+getPorcentajeExtra();
     }
 }

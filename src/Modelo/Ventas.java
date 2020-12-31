@@ -10,6 +10,7 @@ package Modelo;
  * @author jorge
  */
 public class Ventas {
+    private String clave;
     private String nombreComprador;
     private String nombreVendedor;
     private String modeloCarro;
@@ -18,7 +19,8 @@ public class Ventas {
     
     //Constructores
 
-    public Ventas(String nombreComprador, String nombreVendedor, String modeloCarro, String colorAuto, String precioAuto) {
+    public Ventas(String clave,String nombreComprador, String nombreVendedor, String modeloCarro, String colorAuto, String precioAuto) {
+        this.clave = clave;
         this.nombreComprador = nombreComprador;
         this.nombreVendedor = nombreVendedor;
         this.modeloCarro = modeloCarro;
@@ -31,6 +33,10 @@ public class Ventas {
     }
     
     //Métodos get
+
+    public String getClave() {
+        return clave;
+    }    
 
     public String getNombreComprador() {
         return nombreComprador;
@@ -76,7 +82,7 @@ public class Ventas {
     
     @Override
     public String toString(){
-        return getNombreComprador()+" "+getNombreVendedor()+" "+getModeloCarro()+" "+getColorAuto()+" "+getPrecioAuto();
+        return getClave() + " " +getNombreComprador()+" "+getNombreVendedor()+" "+getModeloCarro()+" "+getColorAuto()+" "+getPrecioAuto();
     }
     
 }

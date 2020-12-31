@@ -14,8 +14,8 @@ public class Vigilante extends ManteYVigi{
     
     //Constructores
 
-    public Vigilante(String nombre, String apellido, int dias, double sueldoBase, double prestamo, double gratific,double vacaciones) {
-        super(nombre, apellido, dias, sueldoBase, prestamo, gratific);
+    public Vigilante(String clave,String nombre, String apellido, int dias, double sueldoBase, double prestamo, double gratific,double vacaciones) {
+        super(clave,nombre, apellido, dias, sueldoBase, prestamo, gratific);
         this.vacaciones = vacaciones;
     }
     

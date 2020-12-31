@@ -10,6 +10,7 @@ package Modelo;
  * @author jorge
  */
 public abstract class Empleado implements PorPagar{
+    private String clave;
     private String nombre;
     private String apellido;
     private int dias;
@@ -17,7 +18,8 @@ public abstract class Empleado implements PorPagar{
     private double prestamo;
     
 //Constructores 
-    public Empleado(String nombre, String apellido, int dias, double sueldoBase, double prestamo) {
+    public Empleado(String clave, String nombre, String apellido, int dias, double sueldoBase, double prestamo) {
+        this.clave = clave;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dias = dias;
@@ -29,6 +31,10 @@ public abstract class Empleado implements PorPagar{
     }
  //Métodos get   
 
+    public String getClave() {
+        return clave;
+    }
+        
     public String getNombre() {
         return nombre;
     }
@@ -49,6 +55,10 @@ public abstract class Empleado implements PorPagar{
         return prestamo;
     }
  //Métodos set 
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }        
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -73,7 +83,7 @@ public abstract class Empleado implements PorPagar{
 
     @Override
     public String toString() {
-        return getNombre() + " " + getApellido() + " " + getDias() + " " + getSueldoBase() + " " + getPrestamo();
+        return getClave() + " " +getNombre() + " " + getApellido() + " " + getDias() + " " + getSueldoBase() + " " + getPrestamo();
     }
     
     

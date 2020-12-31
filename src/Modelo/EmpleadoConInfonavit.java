@@ -13,8 +13,8 @@ public class EmpleadoConInfonavit extends Empleado{
     private double tasaDescInfona;
     //Constructores
 
-    public EmpleadoConInfonavit(String nombre, String apellido, int dias, double sueldoBase, double prestamo,double tasaDescInfona) {
-        super(nombre, apellido, dias, sueldoBase, prestamo);
+    public EmpleadoConInfonavit(String clave,String nombre, String apellido, int dias, double sueldoBase, double prestamo,double tasaDescInfona) {
+        super(clave,nombre, apellido, dias, sueldoBase, prestamo);
         this.tasaDescInfona = tasaDescInfona;
     }
 
