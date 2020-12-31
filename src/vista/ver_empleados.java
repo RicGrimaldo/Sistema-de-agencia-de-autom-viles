@@ -5,6 +5,8 @@
  */
 package vista;
 
+import Tablas.TablaAdministrativo;
+
 /**
  *
  * @author asha2
@@ -14,9 +16,15 @@ public class ver_empleados extends javax.swing.JFrame {
     /**
      * Creates new form ver_empleados
      */
+    public TablaAdministrativo tabla = new TablaAdministrativo();
     public ver_empleados() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
+        inicializarTabla();
+    }
+    
+    public void inicializarTabla(){
+        tabla.iniciarTabla(this.TablaAdministrativos);
     }
 
     /**
