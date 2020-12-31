@@ -44,8 +44,8 @@ public class TablaVendedor {
                 row.add(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(i)).getTarifaComision());
                 row.add(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(i)).getVentasDelVendedor());
                 row.add(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(i)).getAutosVendidos());
-            }            
-            modelo.addRow(row); // Aquí se va armando la matriz de datos
+                modelo.addRow(row); // Aquí se va armando la matriz de datos
+            }                        
         }      
         tabla.setModel(modelo);
     }

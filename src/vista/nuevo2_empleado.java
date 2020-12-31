@@ -130,6 +130,9 @@ public class nuevo2_empleado extends javax.swing.JFrame {
                             .addComponent(txtSueldoBase, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDias, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -142,11 +145,8 @@ public class nuevo2_empleado extends javax.swing.JFrame {
                             .addComponent(txtVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                             .addComponent(txtTarifaComision, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                             .addComponent(txtCochesVendidos)
-                            .addComponent(txtClave)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                            .addComponent(txtClave))
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(133, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,7 +255,13 @@ public class nuevo2_empleado extends javax.swing.JFrame {
             this.LimpiarCampos();
             
             Empleado empleado = new Vendedor(clave,nombre,apellido,dias,sueldoBase,prestamo,tasaDescInfona,tarifaComision,ventas,autosVendidos);
-            Interfaz_Proyectofinal.listaEmpleados.add(empleado);                        
+            Interfaz_Proyectofinal.listaEmpleados.add(empleado);      
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otro empleado?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
+            if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
+                ventana_empleados Ventana_empleados = new ventana_empleados();
+                this.dispose();
+                Ventana_empleados.setVisible(true);
+            }//Cierra la ventana
         }
         catch(NumberFormatException e1){
             JOptionPane.showMessageDialog(this, "Debe llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
@@ -299,6 +305,10 @@ public class nuevo2_empleado extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btGuardar;
+    private javax.swing.JButton btRegresar;
+    private javax.swing.JButton btRegresar1;
+    private javax.swing.JButton btRegresar2;
+    private javax.swing.JButton btRegresar3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

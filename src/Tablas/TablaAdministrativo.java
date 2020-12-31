@@ -42,8 +42,8 @@ public class TablaAdministrativo {
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getTasaDescInfona());
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getVacaciones());
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getGratific());
-            }            
-            modelo.addRow(row); // Aquí se va armando la matriz de datos
+                modelo.addRow(row); // Aquí se va armando la matriz de datos
+            }                        
         }      
         tabla.setModel(modelo);
     }
