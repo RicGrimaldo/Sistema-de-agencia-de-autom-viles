@@ -7,7 +7,6 @@ package vista;
 
 import Modelo.Empleado;
 import Modelo.Mantenimiento;
-import Modelo.Mecanico;
 import interfaz_proyectofinal.Interfaz_Proyectofinal;
 import javax.swing.JOptionPane;
 

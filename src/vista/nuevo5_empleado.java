@@ -5,6 +5,12 @@
  */
 package vista;
 
+import Modelo.Empleado;
+import Modelo.Mantenimiento;
+import Modelo.Vigilante;
+import interfaz_proyectofinal.Interfaz_Proyectofinal;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author asha2
@@ -16,8 +22,19 @@ public class nuevo5_empleado extends javax.swing.JFrame {
      */
     public nuevo5_empleado() {
         initComponents();
+        setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
     }
-
+    
+    private void LimpiarCampos(){
+        this.txtClave.setText("");
+        this.txtNombre.setText("");
+        this.txtApellido.setText("");
+        this.txtDias.setText("");
+        this.txtSueldoBase.setText("");
+        this.txtPrestamo.setText("");
+        this.txtGratificaciones.setText("");
+        this.txtVacaciones.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,7 +62,7 @@ public class nuevo5_empleado extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtClave = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtGratifiaciones = new javax.swing.JTextField();
+        txtGratificaciones = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,7 +144,7 @@ public class nuevo5_empleado extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtVacaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                             .addComponent(txtClave)
-                            .addComponent(txtGratifiaciones))
+                            .addComponent(txtGratificaciones))
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(133, Short.MAX_VALUE)
@@ -171,7 +188,7 @@ public class nuevo5_empleado extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtGratifiaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtGratificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -211,7 +228,31 @@ public class nuevo5_empleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        // TODO add your handling code here:
+        try{
+            String clave = this.txtClave.getText();
+            String nombre = this.txtNombre.getText();
+            String apellido = this.txtApellido.getText();
+            int dias = Integer.parseInt(this.txtDias.getText());
+            double sueldoBase = Double.parseDouble(this.txtSueldoBase.getText());
+            double prestamo = Double.parseDouble(this.txtPrestamo.getText());
+            double gratific = Double.parseDouble(this.txtGratificaciones.getText());
+            double vacaciones = Double.parseDouble(this.txtVacaciones.getText());            
+
+            JOptionPane.showMessageDialog(this, "Empleado de vigilancia "+nombre+"\nguardado con éxito.","Mantenimiento y vigilancia.",JOptionPane.INFORMATION_MESSAGE);
+            this.LimpiarCampos();
+            
+            Empleado empleado = new Vigilante(clave,nombre,apellido,dias,sueldoBase,prestamo,gratific,vacaciones);
+            Interfaz_Proyectofinal.listaEmpleados.add(empleado);      
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otro empleado?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
+            if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
+                ventana_empleados Ventana_empleados = new ventana_empleados();
+                this.dispose();
+                Ventana_empleados.setVisible(true);
+            }//Cierra la ventana
+        }
+        catch(NumberFormatException e1){
+            JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btGuardarActionPerformed
 
     /**
@@ -264,7 +305,7 @@ public class nuevo5_empleado extends javax.swing.JFrame {
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtClave;
     private javax.swing.JTextField txtDias;
-    private javax.swing.JTextField txtGratifiaciones;
+    private javax.swing.JTextField txtGratificaciones;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrestamo;
     private javax.swing.JTextField txtSueldoBase;

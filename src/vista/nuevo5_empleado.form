@@ -94,7 +94,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="txtVacaciones" pref="130" max="32767" attributes="0"/>
                               <Component id="txtClave" max="32767" attributes="0"/>
-                              <Component id="txtGratifiaciones" max="32767" attributes="0"/>
+                              <Component id="txtGratificaciones" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -154,7 +154,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel8" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="txtGratifiaciones" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtGratificaciones" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -290,7 +290,7 @@
             <Property name="text" type="java.lang.String" value="jLabel8"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtGratifiaciones">
+        <Component class="javax.swing.JTextField" name="txtGratificaciones">
         </Component>
       </SubComponents>
     </Container>

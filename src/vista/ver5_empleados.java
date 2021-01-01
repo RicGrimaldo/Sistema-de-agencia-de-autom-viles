@@ -5,6 +5,8 @@
  */
 package vista;
 
+import Tablas.TablaVigilancia;
+
 /**
  *
  * @author asha2
@@ -14,9 +16,15 @@ public class ver5_empleados extends javax.swing.JFrame {
     /**
      * Creates new form ver5_empleados
      */
+    TablaVigilancia modelo = new TablaVigilancia();
     public ver5_empleados() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
+        InicializarTabla();
+    }
+    
+    public void InicializarTabla(){
+        modelo.iniciarTabla(this.TablaVigilancia);        
     }
 
     /**
