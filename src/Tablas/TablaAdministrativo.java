@@ -29,6 +29,7 @@ public class TablaAdministrativo {
         modelo.addColumn("Tasa de descuento");
         modelo.addColumn("Vacaciones");
         modelo.addColumn("Gratificaciones");
+        modelo.addColumn("Sueldo final");
         
         for(int i= 0; i< Interfaz_Proyectofinal.listaEmpleados.size(); i++){
             Vector<Object> row = new Vector<Object>();
@@ -42,6 +43,7 @@ public class TablaAdministrativo {
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getTasaDescInfona());
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getVacaciones());
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getGratific());
+                row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).cantPagar());
                 modelo.addRow(row); // Aquí se va armando la matriz de datos
             }                        
         }      

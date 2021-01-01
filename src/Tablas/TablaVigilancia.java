@@ -29,6 +29,7 @@ public class TablaVigilancia {
         modelo.addColumn("Préstamo");
         modelo.addColumn("Vacaciones");
         modelo.addColumn("Gratificaciones");
+        modelo.addColumn("Sueldo final");
         
         for(int i= 0; i< Interfaz_Proyectofinal.listaEmpleados.size(); i++){
             Vector<Object> row = new Vector<Object>();
@@ -40,7 +41,8 @@ public class TablaVigilancia {
                 row.add(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(i)).getSueldoBase());
                 row.add(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(i)).getPrestamo());
                 row.add(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(i)).getVacaciones());
-                row.add(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(i)).getGratific());                
+                row.add(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(i)).getGratific());  
+                row.add(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(i)).cantPagar());
                 modelo.addRow(row); // Aquí se va armando la matriz de datos
             }                        
         }      

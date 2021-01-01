@@ -30,6 +30,7 @@ public class TablaVendedor {
         modelo.addColumn("Tarifa de comisión");
         modelo.addColumn("$ Ventas");
         modelo.addColumn("# Coches vendidos");
+        modelo.addColumn("Sueldo final");
         
         for(int i= 0; i< Interfaz_Proyectofinal.listaEmpleados.size(); i++){
             Vector<Object> row = new Vector<Object>();
@@ -44,6 +45,7 @@ public class TablaVendedor {
                 row.add(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(i)).getTarifaComision());
                 row.add(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(i)).getVentasDelVendedor());
                 row.add(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(i)).getAutosVendidos());
+                row.add(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(i)).cantPagar());
                 modelo.addRow(row); // Aquí se va armando la matriz de datos
             }                        
         }      

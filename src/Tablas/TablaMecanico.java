@@ -31,6 +31,7 @@ public class TablaMecanico {
         modelo.addColumn("Vacaciones");
         modelo.addColumn("Gratificaciones");
         modelo.addColumn("Horas extra");
+        modelo.addColumn("Sueldo final");
         
         for(int i= 0; i< Interfaz_Proyectofinal.listaEmpleados.size(); i++){
             Vector<Object> row = new Vector<Object>();
@@ -45,6 +46,7 @@ public class TablaMecanico {
                 row.add(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(i)).getVacaciones());
                 row.add(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(i)).getGratific());
                 row.add(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(i)).getHrsExt());
+                row.add(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(i)).cantPagar());
                 modelo.addRow(row); // Aquí se va armando la matriz de datos
             }                        
         }      
