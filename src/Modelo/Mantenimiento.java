@@ -40,11 +40,11 @@ public class Mantenimiento extends ManteYVigi{
     }
     
     public double calcDescISR(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(),getGratific(), getHrsExt())*1.1);
+        double desc=(sueldoAcumulado(super.getSueldoBase(),getGratific(), getHrsExt())*.011);
         return desc;
     }
     public double calcDescIMSS(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(), getGratific(), getHrsExt())*1.7);
+        double desc=(sueldoAcumulado(super.getSueldoBase(), getGratific(), getHrsExt())*.017);
         return desc;
     }
     

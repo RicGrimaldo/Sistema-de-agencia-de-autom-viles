@@ -48,15 +48,15 @@ public class Administrativos extends EmpleadoConInfonavit{
     }
     
     public double calcDescISR(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific())*5.25);
+        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific())*.0525);
         return desc;
     }
     public double calcDescIMSS(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific())*1.22);
+        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific())*.0122);
         return desc;
     }
     public double calcDescInfona(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific())*super.getTasaDescInfona());
+        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific())*(super.getTasaDescInfona())/100);
         return desc;
     }
     

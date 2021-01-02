@@ -8,6 +8,7 @@ package Tablas;
 import Modelo.Mecanico;
 import Modelo.Vendedor;
 import interfaz_proyectofinal.Interfaz_Proyectofinal;
+import java.text.DecimalFormat;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +21,7 @@ public class TablaMecanico {
      public void iniciarTabla(JTable tabla){
         Vector< Vector<Object> > data = new Vector< Vector<Object> >();
         DefaultTableModel modelo = new DefaultTableModel();  
+        DecimalFormat df = new DecimalFormat("#.0000");
         
         modelo.addColumn("Clave");
         modelo.addColumn("Nombre");
@@ -46,7 +48,7 @@ public class TablaMecanico {
                 row.add(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(i)).getVacaciones());
                 row.add(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(i)).getGratific());
                 row.add(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(i)).getHrsExt());
-                row.add(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(i)).cantPagar());
+                row.add(df.format(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(i)).cantPagar()));
                 modelo.addRow(row); // Aquí se va armando la matriz de datos
             }                        
         }      

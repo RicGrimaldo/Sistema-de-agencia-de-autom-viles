@@ -41,11 +41,11 @@ public class Vigilante extends ManteYVigi{
     }
     
     public double calcDescISR(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(),getGratific(), getVacaciones())*1.34);
+        double desc=(sueldoAcumulado(super.getSueldoBase(),getGratific(), getVacaciones())*.0134);
         return desc;
     }
     public double calcDescIMSS(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(), getGratific(), getVacaciones())*1.7);
+        double desc=(sueldoAcumulado(super.getSueldoBase(), getGratific(), getVacaciones())*.017);
         return desc;
     }
     

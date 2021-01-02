@@ -61,19 +61,19 @@ public class Mecanico extends EmpleadoConInfonavit{
     }
     
     public double calcDescISR(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific(),getHrsExt())*1.27);
+        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific(),getHrsExt())*.0127);
         return desc;
     }
     public double calcDescIMSS(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific(),getHrsExt())*1.45);
+        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific(),getHrsExt())*.0145);
         return desc;
     }
     public double calcDescInfona(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific(),getHrsExt())*super.getTasaDescInfona());
+        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific(),getHrsExt())*(super.getTasaDescInfona())/100);
         return desc; 
     }
     public double calcDescCona(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific(),getHrsExt())*1.20);
+        double desc=(sueldoAcumulado(super.getSueldoBase(), getVacaciones(), getGratific(),getHrsExt())*.0120);
         return desc;
     }
     @Override 

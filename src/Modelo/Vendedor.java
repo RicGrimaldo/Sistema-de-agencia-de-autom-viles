@@ -60,15 +60,15 @@ public class Vendedor extends EmpleadoConInfonavit{
     }
     
     public double calcDescISR(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(), getTarifaComision(), getVentasDelVendedor())*4.27);
+        double desc=(sueldoAcumulado(super.getSueldoBase(), getTarifaComision(), getVentasDelVendedor())*.0427);
         return desc;
     }
     public double calcDescIMSS(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(), getTarifaComision(), getVentasDelVendedor())*1.7);
+        double desc=(sueldoAcumulado(super.getSueldoBase(), getTarifaComision(), getVentasDelVendedor())*.017);
         return desc;
     }
     public double calcDescInfona(){
-        double desc=(sueldoAcumulado(super.getSueldoBase(), getTarifaComision(), getVentasDelVendedor())*super.getTasaDescInfona());
+        double desc=(sueldoAcumulado(super.getSueldoBase(), getTarifaComision(), getVentasDelVendedor())*(super.getTasaDescInfona()/100));
         return desc;
     }
     @Override 

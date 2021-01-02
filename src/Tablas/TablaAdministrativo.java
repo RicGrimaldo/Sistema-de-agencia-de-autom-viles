@@ -10,6 +10,7 @@ import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import interfaz_proyectofinal.*;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -19,6 +20,7 @@ public class TablaAdministrativo {
     public void iniciarTabla(JTable tabla){
         Vector< Vector<Object> > data = new Vector< Vector<Object> >();
         DefaultTableModel modelo = new DefaultTableModel();  
+        DecimalFormat df = new DecimalFormat("#.0000");
         
         modelo.addColumn("Clave");
         modelo.addColumn("Nombre");
@@ -43,7 +45,7 @@ public class TablaAdministrativo {
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getTasaDescInfona());
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getVacaciones());
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getGratific());
-                row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).cantPagar());
+                row.add(df.format(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).cantPagar()));
                 modelo.addRow(row); // Aquí se va armando la matriz de datos
             }                        
         }      
