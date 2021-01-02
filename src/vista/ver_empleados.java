@@ -5,7 +5,10 @@
  */
 package vista;
 
+import Modelo.Administrativos;
 import Tablas.TablaAdministrativo;
+import javax.swing.JOptionPane;
+import interfaz_proyectofinal.Interfaz_Proyectofinal;
 
 /**
  *
@@ -17,14 +20,28 @@ public class ver_empleados extends javax.swing.JFrame {
      * Creates new form ver_empleados
      */
     public TablaAdministrativo tabla = new TablaAdministrativo();
+    public int posicion = 0;
+    
+    
     public ver_empleados() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
         inicializarTabla();
     }
-    
+    public static String Clave_modificacion = "";
     public void inicializarTabla(){
         tabla.iniciarTabla(this.TablaAdministrativos);
+    }
+    
+    public boolean Tabla_Vacia(){
+        boolean bandera = false;
+        for(int i=0;i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
+            if(Interfaz_Proyectofinal.listaEmpleados.get(i) instanceof Administrativos){
+                bandera = true;
+                break;
+            }
+        }
+        return bandera;
     }
 
     /**
@@ -150,10 +167,20 @@ public class ver_empleados extends javax.swing.JFrame {
         btModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de Copia de Copia de Copia de Sin título (2).png"))); // NOI18N
         btModificar.setText("jButton5");
         btModificar.setFocusable(false);
+        btModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btModificarActionPerformed(evt);
+            }
+        });
 
         btEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de Copia de Copia de Copia de Sin título (3).png"))); // NOI18N
         btEliminar.setText("jButton5");
         btEliminar.setFocusable(false);
+        btEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -234,6 +261,66 @@ public class ver_empleados extends javax.swing.JFrame {
         this.dispose();
         Ventana_servicios.setVisible(true);
     }//GEN-LAST:event_btFacServiciosActionPerformed
+
+    private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
+        boolean bandera = false;
+        int opcion = 2; 
+        try{
+            if(Tabla_Vacia() == false){
+                JOptionPane.showMessageDialog(this, "No hay ningún empleado registrado.","Aviso.",JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                String Clave = JOptionPane.showInputDialog("Ingrese clave del empleado a eliminar: ");
+                    while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
+                    if(Clave.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
+                        if(Interfaz_Proyectofinal.listaEmpleados.get(posicion) instanceof Administrativos){
+                            opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer eliminar al empleado "+
+                                    Interfaz_Proyectofinal.listaEmpleados.get(posicion).getNombre() +"?","Aviso",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
+                            if(opcion == JOptionPane.YES_OPTION){
+                                Interfaz_Proyectofinal.listaEmpleados.remove(posicion);
+                                bandera = true;
+                            }
+                            else {
+                                bandera = false;
+                                break;
+                            }  
+                        }                                
+                    }
+                    posicion++;
+            }
+            if(bandera == true){
+                JOptionPane.showMessageDialog(this, "Se ha eliminado al empleado con éxito.");
+                tabla.iniciarTabla(TablaAdministrativos);
+            }
+            else{
+                if(bandera == false && opcion == JOptionPane.YES_OPTION){
+                JOptionPane.showMessageDialog(this, "No se ha encontrado el empleado.");
+            }
+            }
+            }
+            
+        }catch(NullPointerException e1){
+            JOptionPane.showMessageDialog(this, "No hay ningún empleado registrado.","Aviso.",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btEliminarActionPerformed
+
+    private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
+        try{
+            if(Tabla_Vacia() == false){
+                JOptionPane.showMessageDialog(this, "No hay ningún empleado registrado.","Aviso.",JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                Clave_modificacion = JOptionPane.showInputDialog("Ingrese clave del empleado a modificar: ");
+                this.dispose();
+                nuevo_empleado ventana = new nuevo_empleado();
+                ventana.setVisible(true);
+            }
+            
+        }catch(NullPointerException e1){
+            JOptionPane.showMessageDialog(this, "Se ha encontrado un error.");
+        }
+        
+    }//GEN-LAST:event_btModificarActionPerformed
 
     /**
      * @param args the command line arguments

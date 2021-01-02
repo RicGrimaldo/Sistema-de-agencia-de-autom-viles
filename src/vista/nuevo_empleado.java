@@ -18,9 +18,41 @@ public class nuevo_empleado extends javax.swing.JFrame {
     /**
      * Creates new form nuevo_empleado
      */
+    public int posicion = 0;
+    public ver_empleados ventana = new ver_empleados();
+    public boolean bandera = false;
     public nuevo_empleado() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
+        inicializarDatos();   
+    }
+    
+    public void inicializarDatos(){  
+        while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
+            if(ventana.Clave_modificacion.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
+                this.txtNombre.setText(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
+                this.txtApellido.setText(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
+                String dias = String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getDias());
+                this.txtDias.setText(dias);
+                this.txtClave.setText(ventana.Clave_modificacion);
+                this.txtSueldoBase.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getSueldoBase()));
+                this.txtPrestamo.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getPrestamo()));
+                this.txtTasaDescuento.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getTasaDescInfona()));
+                this.txtVacaciones.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getVacaciones()));
+                this.txtGratificaciones.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getGratific()));
+                bandera = true;
+                Interfaz_Proyectofinal.listaEmpleados.remove(posicion);                
+                break;
+            }
+            posicion++;
+        }
+        if(bandera == false && ventana.Clave_modificacion.isEmpty() == false){
+            JOptionPane.showMessageDialog(this, "No se encontró el empleado.");
+            ventana_empleados Ventana_empleados = new ventana_empleados();
+            this.dispose();
+            Ventana_empleados.setVisible(true);
+        }
+        ventana.Clave_modificacion = "";
     }
 
     /**
@@ -236,7 +268,7 @@ public class nuevo_empleado extends javax.swing.JFrame {
     }
     
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        try{
+        try{            
             String clave = this.txtClave.getText();
             String nombre = this.txtNombre.getText();
             String apellido = this.txtApellido.getText();
