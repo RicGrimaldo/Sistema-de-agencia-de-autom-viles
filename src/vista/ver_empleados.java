@@ -34,14 +34,25 @@ public class ver_empleados extends javax.swing.JFrame {
     }
     
     public boolean Tabla_Vacia(){
-        boolean bandera = false;
+        boolean bandera = true;
         for(int i=0;i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
             if(Interfaz_Proyectofinal.listaEmpleados.get(i) instanceof Administrativos){
-                bandera = true;
+                bandera = false;
                 break;
             }
         }
         return bandera;
+    }        
+    
+    public boolean Clave_repetida(String clave){
+        boolean repetido = false;
+        
+        for(int i = 0; i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
+            if(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getClave().equals(clave)){
+                repetido = true;
+            }
+        }        
+        return repetido;
     }
 
     /**
@@ -266,37 +277,43 @@ public class ver_empleados extends javax.swing.JFrame {
         boolean bandera = false;
         int opcion = 2; 
         try{
-            if(Tabla_Vacia() == false){
+            if(Tabla_Vacia() == true){
                 JOptionPane.showMessageDialog(this, "No hay ningún empleado registrado.","Aviso.",JOptionPane.WARNING_MESSAGE);
             }
             else{
                 String Clave = JOptionPane.showInputDialog("Ingrese clave del empleado a eliminar: ");
+                if(Clave_repetida(Clave) == true){
                     while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
-                    if(Clave.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
-                        if(Interfaz_Proyectofinal.listaEmpleados.get(posicion) instanceof Administrativos){
-                            opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer eliminar al empleado "+
-                                    Interfaz_Proyectofinal.listaEmpleados.get(posicion).getNombre() +"?","Aviso",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
-                            if(opcion == JOptionPane.YES_OPTION){
-                                Interfaz_Proyectofinal.listaEmpleados.remove(posicion);
-                                bandera = true;
-                            }
-                            else {
-                                bandera = false;
-                                break;
-                            }  
-                        }                                
-                    }
-                    posicion++;
-            }
-            if(bandera == true){
-                JOptionPane.showMessageDialog(this, "Se ha eliminado al empleado con éxito.");
-                tabla.iniciarTabla(TablaAdministrativos);
-            }
-            else{
-                if(bandera == false && opcion == JOptionPane.YES_OPTION){
-                JOptionPane.showMessageDialog(this, "No se ha encontrado el empleado.");
-            }
-            }
+                        if(Clave.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
+                            if(Interfaz_Proyectofinal.listaEmpleados.get(posicion) instanceof Administrativos){
+                                opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer eliminar al empleado "+
+                                        Interfaz_Proyectofinal.listaEmpleados.get(posicion).getNombre() +"?","Aviso",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
+                                if(opcion == JOptionPane.YES_OPTION){
+                                    Interfaz_Proyectofinal.listaEmpleados.remove(posicion);
+                                    bandera = true;
+                                }
+                                else {
+                                    bandera = false;
+                                    break;
+                                }  
+                            }                                
+                        }
+                        posicion++;
+                }
+                if(bandera == true){
+                    JOptionPane.showMessageDialog(this, "Se ha eliminado al empleado con éxito.");
+                    tabla.iniciarTabla(TablaAdministrativos);
+                }
+                else{
+                    if(bandera == false && opcion == JOptionPane.YES_OPTION){
+                    JOptionPane.showMessageDialog(this, "No se ha encontrado el empleado.");
+                }
+                }
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "No se encontró el empleado.","Aviso.",JOptionPane.WARNING_MESSAGE);
+                }
+                    
             }
             
         }catch(NullPointerException e1){
@@ -306,14 +323,22 @@ public class ver_empleados extends javax.swing.JFrame {
 
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
         try{
-            if(Tabla_Vacia() == false){
+            if(Tabla_Vacia() == true){
                 JOptionPane.showMessageDialog(this, "No hay ningún empleado registrado.","Aviso.",JOptionPane.WARNING_MESSAGE);
             }
             else{
-                Clave_modificacion = JOptionPane.showInputDialog("Ingrese clave del empleado a modificar: ");
-                this.dispose();
-                nuevo_empleado ventana = new nuevo_empleado();
-                ventana.setVisible(true);
+                Clave_modificacion = JOptionPane.showInputDialog("Ingrese clave del empleado a modificar: ");                 
+                
+                if(Clave_repetida(Clave_modificacion) == true){
+                    nuevo_empleado ventana = new nuevo_empleado();
+                    ventana.setVisible(true);
+                    this.dispose();
+                }
+                else {
+                    JOptionPane.showMessageDialog(this, "No se encontró el empleado.","Aviso.",JOptionPane.WARNING_MESSAGE);
+                    Clave_modificacion = "";
+                }
+                
             }
             
         }catch(NullPointerException e1){

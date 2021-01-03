@@ -40,19 +40,24 @@ public class nuevo_empleado extends javax.swing.JFrame {
                 this.txtTasaDescuento.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getTasaDescInfona()));
                 this.txtVacaciones.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getVacaciones()));
                 this.txtGratificaciones.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getGratific()));
-                bandera = true;
+                bandera = true;                                
                 Interfaz_Proyectofinal.listaEmpleados.remove(posicion);                
                 break;
             }
             posicion++;
         }
-        if(bandera == false && ventana.Clave_modificacion.isEmpty() == false){
-            JOptionPane.showMessageDialog(this, "No se encontró el empleado.");
-            ventana_empleados Ventana_empleados = new ventana_empleados();
-            this.dispose();
-            Ventana_empleados.setVisible(true);
-        }
         ventana.Clave_modificacion = "";
+    }
+    
+    public boolean Clave_repetida(String clave){
+        boolean repetido = false;
+        
+        for(int i = 0; i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
+            if(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getClave().equals(clave)){
+                repetido = true;
+            }
+        }        
+        return repetido;
     }
 
     /**
@@ -279,17 +284,23 @@ public class nuevo_empleado extends javax.swing.JFrame {
             double vacaciones = Double.parseDouble(this.txtVacaciones.getText());
             double gratific = Double.parseDouble(this.txtGratificaciones.getText());
 
-            JOptionPane.showMessageDialog(this, "Administrativo "+nombre+" guardado con éxito.","Nuevo empleado administrativo.",JOptionPane.INFORMATION_MESSAGE);
-            this.LimpiarCampos();
+            if(Clave_repetida(clave) == false){
+                JOptionPane.showMessageDialog(this, "Administrativo "+nombre+" guardado con éxito.","Nuevo empleado administrativo.",JOptionPane.INFORMATION_MESSAGE);
+                this.LimpiarCampos();
+
+                Empleado empleado = new Administrativos(clave,nombre,apellido,dias,sueldoBase,prestamo,tasaDescInfona,vacaciones,gratific);
+                Interfaz_Proyectofinal.listaEmpleados.add(empleado);
+                int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otro empleado?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
+                if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
+                    ventana_empleados Ventana_empleados = new ventana_empleados();
+                    this.dispose();
+                    Ventana_empleados.setVisible(true);
+                }//Cierra la ventana
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Ya existe un empleado con la clave " + clave,"Error al intentar registrar empleado.",JOptionPane.WARNING_MESSAGE);
+            }
             
-            Empleado empleado = new Administrativos(clave,nombre,apellido,dias,sueldoBase,prestamo,tasaDescInfona,vacaciones,gratific);
-            Interfaz_Proyectofinal.listaEmpleados.add(empleado);
-            int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otro empleado?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
-            if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
-                ventana_empleados Ventana_empleados = new ventana_empleados();
-                this.dispose();
-                Ventana_empleados.setVisible(true);
-            }//Cierra la ventana
         }
         catch(NumberFormatException e1){
             JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
