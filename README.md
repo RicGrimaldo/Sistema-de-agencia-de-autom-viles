@@ -1,4 +1,4 @@
-# Sistema de agencia de automviles
+# Sistema de agencia de automoviles
 Repositorio del proyecto de POO.
 Proyecto creado por:
 - CARLOS ADRIAN KUK BAEZA
