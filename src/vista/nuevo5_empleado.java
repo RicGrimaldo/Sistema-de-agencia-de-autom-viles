@@ -31,18 +31,20 @@ public class nuevo5_empleado extends javax.swing.JFrame {
     public void inicializarDatos(){  
         try{           
             while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
-            if(ventana.Clave_modificacion.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
-                this.txtNombre.setText(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
-                this.txtApellido.setText(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
-                this.txtDias.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getDias()));
-                this.txtClave.setText(ventana.Clave_modificacion);
-                this.txtSueldoBase.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getSueldoBase()));
-                this.txtPrestamo.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getPrestamo()));
-                this.txtVacaciones.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getVacaciones()));
-                this.txtGratificaciones.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getGratific()));
-                bandera = true;                                
-                Interfaz_Proyectofinal.listaEmpleados.remove(posicion);                
-                break;
+                if(Interfaz_Proyectofinal.listaEmpleados.get(posicion)instanceof Vigilante){
+                    if(ventana.Clave_modificacion.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
+                    this.txtNombre.setText(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
+                    this.txtApellido.setText(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
+                    this.txtDias.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getDias()));
+                    this.txtClave.setText(ventana.Clave_modificacion);
+                    this.txtSueldoBase.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getSueldoBase()));
+                    this.txtPrestamo.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getPrestamo()));
+                    this.txtVacaciones.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getVacaciones()));
+                    this.txtGratificaciones.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getGratific()));
+                    bandera = true;                                
+                    Interfaz_Proyectofinal.listaEmpleados.remove(posicion);                
+                    break;
+                }            
             }
             posicion++;
         }

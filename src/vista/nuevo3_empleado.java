@@ -31,20 +31,22 @@ public class nuevo3_empleado extends javax.swing.JFrame {
     public void inicializarDatos(){  
         try{           
             while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
-            if(ventana.Clave_modificacion.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
-                this.txtNombre.setText(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
-                this.txtApellido.setText(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
-                this.txtDias.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getDias()));
-                this.txtClave.setText(ventana.Clave_modificacion);
-                this.txtSueldoBase.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getSueldoBase()));
-                this.txtPrestamo.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getPrestamo()));
-                this.txtTasaDescuento.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getTasaDescInfona()));                
-                this.txtVacaciones.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getVacaciones()));
-                this.txtGratificaciones.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getGratific()));
-                this.txtHrsExtra.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getHrsExt()));                
-                bandera = true;                                
-                Interfaz_Proyectofinal.listaEmpleados.remove(posicion);                
-                break;
+                if(Interfaz_Proyectofinal.listaEmpleados.get(posicion)instanceof Mecanico){
+                    if(ventana.Clave_modificacion.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
+                    this.txtNombre.setText(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
+                    this.txtApellido.setText(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
+                    this.txtDias.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getDias()));
+                    this.txtClave.setText(ventana.Clave_modificacion);
+                    this.txtSueldoBase.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getSueldoBase()));
+                    this.txtPrestamo.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getPrestamo()));
+                    this.txtTasaDescuento.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getTasaDescInfona()));                
+                    this.txtVacaciones.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getVacaciones()));
+                    this.txtGratificaciones.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getGratific()));
+                    this.txtHrsExtra.setText(String.valueOf(((Mecanico)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getHrsExt()));                
+                    bandera = true;                                
+                    Interfaz_Proyectofinal.listaEmpleados.remove(posicion);                
+                    break;
+                }            
             }
             posicion++;
         }
