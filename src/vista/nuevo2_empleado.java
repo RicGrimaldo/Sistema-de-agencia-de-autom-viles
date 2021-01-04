@@ -5,8 +5,7 @@
  */
 package vista;
 
-import Modelo.Empleado;
-import Modelo.Vendedor;
+import Modelo.*;
 import interfaz_proyectofinal.Interfaz_Proyectofinal;
 import javax.swing.JOptionPane;
 
@@ -19,9 +18,52 @@ public class nuevo2_empleado extends javax.swing.JFrame {
     /**
      * Creates new form nuevo2_empleado
      */
+    public int posicion = 0;
+    public ver2_empleados ventana = new ver2_empleados();
+    public boolean bandera = false;
     public nuevo2_empleado() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
+        inicializarDatos();   
+    }
+    
+    public void inicializarDatos(){  
+        try{
+            while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
+            if(ver2_empleados.Clave_modificacion.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
+                this.txtNombre.setText(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
+                this.txtApellido.setText(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
+                this.txtDias.setText(String.valueOf(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getDias()));
+                this.txtClave.setText(ventana.Clave_modificacion);
+                this.txtSueldoBase.setText(String.valueOf(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getSueldoBase()));
+                this.txtPrestamo.setText(String.valueOf(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getPrestamo()));
+                this.txtTasaDescuento.setText(String.valueOf(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getTasaDescInfona()));                
+                this.txtTarifaComision.setText(String.valueOf(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getTarifaComision()));
+                this.txtVentas.setText(String.valueOf(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getVentasDelVendedor()));
+                this.txtCochesVendidos.setText(String.valueOf(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getAutosVendidos()));
+                bandera = true;                                
+                Interfaz_Proyectofinal.listaEmpleados.remove(posicion);                
+                break;
+            }
+            posicion++;
+        }
+        ventana.Clave_modificacion = "";
+    }catch(ClassCastException e1){
+        JOptionPane.showMessageDialog(this, "Ha ocurrido un error.");
+    }
+    }
+    
+    private boolean Clave_repetida(String clave){
+        boolean repetido = false;
+        
+        for(int i = 0; i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
+            if(Interfaz_Proyectofinal.listaEmpleados.get(i)instanceof Vendedor){
+                if(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(i)).getClave().equals(clave)){
+                   repetido = true;
+                }
+            }   
+        }        
+        return repetido;
     }
 
     /**
@@ -251,17 +293,23 @@ public class nuevo2_empleado extends javax.swing.JFrame {
             double ventas = Double.parseDouble(this.txtVentas.getText());
             int autosVendidos = Integer.parseInt(this.txtCochesVendidos.getText());
 
-            JOptionPane.showMessageDialog(this, "Vendedor "+nombre+" guardado con éxito.","Nuevo vendedor registrado.",JOptionPane.INFORMATION_MESSAGE);
-            this.LimpiarCampos();
+            if(Clave_repetida(clave) == false){
+                JOptionPane.showMessageDialog(this, "Vendedor "+nombre+" guardado con éxito.","Nuevo vendedor registrado.",JOptionPane.INFORMATION_MESSAGE);
+                this.LimpiarCampos();
+
+                Empleado empleado = new Vendedor(clave,nombre,apellido,dias,sueldoBase,prestamo,tasaDescInfona,tarifaComision,ventas,autosVendidos);
+                Interfaz_Proyectofinal.listaEmpleados.add(empleado);      
+                int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otro empleado?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
+                if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
+                    ventana_empleados Ventana_empleados = new ventana_empleados();
+                    this.dispose();
+                    Ventana_empleados.setVisible(true);
+                }//Cierra la ventana
+                else{
+                    JOptionPane.showMessageDialog(this, "Ya existe un empleado con la clave " + clave,"Error al intentar registrar empleado.",JOptionPane.WARNING_MESSAGE);
+                }
+            }
             
-            Empleado empleado = new Vendedor(clave,nombre,apellido,dias,sueldoBase,prestamo,tasaDescInfona,tarifaComision,ventas,autosVendidos);
-            Interfaz_Proyectofinal.listaEmpleados.add(empleado);      
-            int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otro empleado?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
-            if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
-                ventana_empleados Ventana_empleados = new ventana_empleados();
-                this.dispose();
-                Ventana_empleados.setVisible(true);
-            }//Cierra la ventana
         }
         catch(NumberFormatException e1){
             JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);

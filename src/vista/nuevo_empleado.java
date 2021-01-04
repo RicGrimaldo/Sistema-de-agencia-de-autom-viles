@@ -49,13 +49,15 @@ public class nuevo_empleado extends javax.swing.JFrame {
         ventana.Clave_modificacion = "";
     }
     
-    public boolean Clave_repetida(String clave){
+    private boolean Clave_repetida(String clave){
         boolean repetido = false;
         
         for(int i = 0; i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
-            if(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getClave().equals(clave)){
-                repetido = true;
-            }
+            if(Interfaz_Proyectofinal.listaEmpleados.get(i)instanceof Administrativos){
+                if(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getClave().equals(clave)){
+                   repetido = true;
+                }
+            }            
         }        
         return repetido;
     }
@@ -304,6 +306,9 @@ public class nuevo_empleado extends javax.swing.JFrame {
         }
         catch(NumberFormatException e1){
             JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
+        }
+        catch(ClassCastException e2){
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error al guardar administrativo.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_btGuardarActionPerformed

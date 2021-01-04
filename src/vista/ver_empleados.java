@@ -33,7 +33,7 @@ public class ver_empleados extends javax.swing.JFrame {
         tabla.iniciarTabla(this.TablaAdministrativos);
     }
     
-    public boolean Tabla_Vacia(){
+    private boolean Tabla_Vacia(){
         boolean bandera = true;
         for(int i=0;i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
             if(Interfaz_Proyectofinal.listaEmpleados.get(i) instanceof Administrativos){
@@ -44,13 +44,15 @@ public class ver_empleados extends javax.swing.JFrame {
         return bandera;
     }        
     
-    public boolean Clave_repetida(String clave){
+    private boolean Clave_repetida(String clave){
         boolean repetido = false;
         
         for(int i = 0; i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
-            if(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getClave().equals(clave)){
-                repetido = true;
-            }
+            if(Interfaz_Proyectofinal.listaEmpleados.get(i)instanceof Administrativos){
+                if(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getClave().equals(clave)){
+                   repetido = true;
+                }
+            }            
         }        
         return repetido;
     }
