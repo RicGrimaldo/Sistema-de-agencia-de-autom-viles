@@ -32,24 +32,26 @@ public class nuevo4_empleado extends javax.swing.JFrame {
     public void inicializarDatos(){  
         try{           
             while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
-            if(ventana.Clave_modificacion.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
-                this.txtNombre.setText(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
-                this.txtApellido.setText(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
-                this.txtDias.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getDias()));
-                this.txtClave.setText(ventana.Clave_modificacion);
-                this.txtSueldoBase.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getSueldoBase()));
-                this.txtPrestamo.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getPrestamo()));                
-                this.txtGratificaciones.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getGratific()));
-                this.txtHrsExtra.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getHrsExt()));                
-                bandera = true;                                
-                Interfaz_Proyectofinal.listaEmpleados.remove(posicion);                
-                break;
-            }
+                if(Interfaz_Proyectofinal.listaEmpleados.get(posicion) instanceof Mantenimiento){
+                    if(ventana.Clave_modificacion4.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){              
+                    this.txtNombre.setText(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
+                    this.txtApellido.setText(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
+                    this.txtDias.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getDias()));
+                    this.txtClave.setText(ventana.Clave_modificacion4);
+                    this.txtSueldoBase.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getSueldoBase()));
+                    this.txtPrestamo.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getPrestamo()));                
+                    this.txtGratificaciones.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getGratific()));
+                    this.txtHrsExtra.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getHrsExt()));                
+                    bandera = true;                                
+                    Interfaz_Proyectofinal.listaEmpleados.remove(posicion);                
+                    break;
+                    }
+                }            
             posicion++;
         }
-        ventana.Clave_modificacion = "";
+        ventana.Clave_modificacion4 = "";
     }catch(ClassCastException e1){
-        JOptionPane.showMessageDialog(this, "Ha ocurrido un error.");
+        JOptionPane.showMessageDialog(this, "Ha ocurrido un error 4.");
     }
     }
     

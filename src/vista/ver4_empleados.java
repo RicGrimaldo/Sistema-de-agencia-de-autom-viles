@@ -32,7 +32,7 @@ public class ver4_empleados extends javax.swing.JFrame {
         modelo.iniciarTabla(this.TablaMantenimiento);
     }
     
-    public static String Clave_modificacion = "";
+    public static String Clave_modificacion4 = "";
     
     private boolean Tabla_Vacia(){
         boolean bandera = true;
@@ -328,16 +328,16 @@ public class ver4_empleados extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "No hay ningún empleado registrado.","Aviso.",JOptionPane.WARNING_MESSAGE);
             }
             else{
-                Clave_modificacion = JOptionPane.showInputDialog("Ingrese clave del empleado a modificar: ");                 
+                Clave_modificacion4 = JOptionPane.showInputDialog(this,"Ingrese clave del empleado a modificar: "); 
                 
-                if(Clave_repetida(Clave_modificacion) == true){
+                if(Clave_repetida(Clave_modificacion4) == true){
                     nuevo4_empleado ventana = new nuevo4_empleado();
                     ventana.setVisible(true);
                     this.dispose();
                 }
                 else {
                     JOptionPane.showMessageDialog(this, "No se encontró el empleado.","Aviso.",JOptionPane.WARNING_MESSAGE);
-                    Clave_modificacion = "";
+                    Clave_modificacion4 = "";
                 }
                 
             }
