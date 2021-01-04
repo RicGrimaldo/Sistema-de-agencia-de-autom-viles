@@ -6,7 +6,6 @@
 package vista;
 
 import Modelo.Empleado;
-import Modelo.Mantenimiento;
 import Modelo.Vigilante;
 import interfaz_proyectofinal.Interfaz_Proyectofinal;
 import javax.swing.JOptionPane;
@@ -20,11 +19,51 @@ public class nuevo5_empleado extends javax.swing.JFrame {
     /**
      * Creates new form nuevo5_empleado
      */
+    public int posicion = 0;
+    public boolean bandera = false;
+    public ver5_empleados ventana = new ver5_empleados();
     public nuevo5_empleado() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
+        inicializarDatos();   
     }
     
+    public void inicializarDatos(){  
+        try{           
+            while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
+            if(ventana.Clave_modificacion.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
+                this.txtNombre.setText(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
+                this.txtApellido.setText(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
+                this.txtDias.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getDias()));
+                this.txtClave.setText(ventana.Clave_modificacion);
+                this.txtSueldoBase.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getSueldoBase()));
+                this.txtPrestamo.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getPrestamo()));
+                this.txtVacaciones.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getVacaciones()));
+                this.txtGratificaciones.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getGratific()));
+                bandera = true;                                
+                Interfaz_Proyectofinal.listaEmpleados.remove(posicion);                
+                break;
+            }
+            posicion++;
+        }
+        ventana.Clave_modificacion = "";
+    }catch(ClassCastException e1){
+        JOptionPane.showMessageDialog(this, "Ha ocurrido un error.");
+    }
+    }
+    
+    private boolean Clave_repetida(String clave){
+        boolean repetido = false;
+        
+        for(int i = 0; i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
+            if(Interfaz_Proyectofinal.listaEmpleados.get(i)instanceof Vigilante){
+                if(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(i)).getClave().equals(clave)){
+                   repetido = true;
+                }
+            }   
+        }        
+        return repetido;
+    }
     private void LimpiarCampos(){
         this.txtClave.setText("");
         this.txtNombre.setText("");
@@ -238,17 +277,23 @@ public class nuevo5_empleado extends javax.swing.JFrame {
             double gratific = Double.parseDouble(this.txtGratificaciones.getText());
             double vacaciones = Double.parseDouble(this.txtVacaciones.getText());            
 
-            JOptionPane.showMessageDialog(this, "Empleado de vigilancia "+nombre+"\nguardado con éxito.","Mantenimiento y vigilancia.",JOptionPane.INFORMATION_MESSAGE);
-            this.LimpiarCampos();
+            if(Clave_repetida(clave) == false){
+                JOptionPane.showMessageDialog(this, "Empleado de vigilancia "+nombre+"\nguardado con éxito.","Mantenimiento y vigilancia.",JOptionPane.INFORMATION_MESSAGE);
+                this.LimpiarCampos();
+
+                Empleado empleado = new Vigilante(clave,nombre,apellido,dias,sueldoBase,prestamo,gratific,vacaciones);
+                Interfaz_Proyectofinal.listaEmpleados.add(empleado);      
+                int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otro empleado?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
+                if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
+                    ventana_empleados Ventana_empleados = new ventana_empleados();
+                    this.dispose();
+                    Ventana_empleados.setVisible(true);
+                }//Cierra la ventana
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Ya existe un empleado con la clave " + clave,"Error al intentar registrar empleado.",JOptionPane.WARNING_MESSAGE);                                
+            }
             
-            Empleado empleado = new Vigilante(clave,nombre,apellido,dias,sueldoBase,prestamo,gratific,vacaciones);
-            Interfaz_Proyectofinal.listaEmpleados.add(empleado);      
-            int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otro empleado?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
-            if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
-                ventana_empleados Ventana_empleados = new ventana_empleados();
-                this.dispose();
-                Ventana_empleados.setVisible(true);
-            }//Cierra la ventana
         }
         catch(NumberFormatException e1){
             JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);

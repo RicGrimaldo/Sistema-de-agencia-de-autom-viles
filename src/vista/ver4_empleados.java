@@ -5,7 +5,11 @@
  */
 package vista;
 
+import Modelo.Mantenimiento;
 import Tablas.TablaMantenimiento;
+import interfaz_proyectofinal.Interfaz_Proyectofinal;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -17,6 +21,7 @@ public class ver4_empleados extends javax.swing.JFrame {
      * Creates new form ver4_empleados
      */
     public TablaMantenimiento modelo = new TablaMantenimiento();
+    public int posicion = 0;
     public ver4_empleados() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
@@ -25,6 +30,32 @@ public class ver4_empleados extends javax.swing.JFrame {
     
     public void inicializarTabla(){
         modelo.iniciarTabla(this.TablaMantenimiento);
+    }
+    
+    public static String Clave_modificacion = "";
+    
+    private boolean Tabla_Vacia(){
+        boolean bandera = true;
+        for(int i=0;i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
+            if(Interfaz_Proyectofinal.listaEmpleados.get(i) instanceof Mantenimiento){
+                bandera = false;
+                break;
+            }
+        }
+        return bandera;
+    }        
+    
+    private boolean Clave_repetida(String clave){
+        boolean repetido = false;
+        
+        for(int i = 0; i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
+            if(Interfaz_Proyectofinal.listaEmpleados.get(i)instanceof Mantenimiento){
+                if(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(i)).getClave().equals(clave)){
+                   repetido = true;
+                }
+            }   
+        }           
+        return repetido;
     }
     
     
@@ -137,6 +168,11 @@ public class ver4_empleados extends javax.swing.JFrame {
         btEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de Copia de Copia de Copia de Sin título (3).png"))); // NOI18N
         btEliminar.setText("jButton5");
         btEliminar.setFocusable(false);
+        btEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEliminarActionPerformed(evt);
+            }
+        });
 
         jScrollPane2.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -156,6 +192,11 @@ public class ver4_empleados extends javax.swing.JFrame {
         btModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de Copia de Copia de Copia de Sin título (2).png"))); // NOI18N
         btModificar.setText("jButton5");
         btModificar.setFocusable(false);
+        btModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -232,6 +273,79 @@ public class ver4_empleados extends javax.swing.JFrame {
         this.dispose();
         Ventana_servicios.setVisible(true);
     }//GEN-LAST:event_btFacServiciosActionPerformed
+
+    private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
+        boolean bandera = false;
+        int opcion = 2; 
+        try{
+            if(Tabla_Vacia() == true){
+                JOptionPane.showMessageDialog(this, "No hay ningún empleado registrado.","Aviso.",JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                String Clave = JOptionPane.showInputDialog("Ingrese clave del empleado a eliminar: ");
+                if(Clave_repetida(Clave) == true){
+                    while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
+                        if(Clave.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
+                            if(Interfaz_Proyectofinal.listaEmpleados.get(posicion) instanceof Mantenimiento){
+                                opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer eliminar al empleado "+
+                                        Interfaz_Proyectofinal.listaEmpleados.get(posicion).getNombre() +"?","Aviso",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
+                                if(opcion == JOptionPane.YES_OPTION){
+                                    Interfaz_Proyectofinal.listaEmpleados.remove(posicion);
+                                    bandera = true;
+                                }
+                                else {
+                                    bandera = false;
+                                    break;
+                                }  
+                            }                                
+                        }
+                        posicion++;
+                }
+                if(bandera == true){
+                    JOptionPane.showMessageDialog(this, "Se ha eliminado al empleado con éxito.");
+                    modelo.iniciarTabla(this.TablaMantenimiento);
+                }
+                else{
+                    if(bandera == false && opcion == JOptionPane.YES_OPTION){
+                    JOptionPane.showMessageDialog(this, "No se ha encontrado el empleado.");
+                }
+                }
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "No se encontró el empleado.","Aviso.",JOptionPane.WARNING_MESSAGE);
+                }
+                    
+            }
+            
+        }catch(NullPointerException e1){
+            JOptionPane.showMessageDialog(this, "No hay ningún empleado registrado.","Aviso.",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btEliminarActionPerformed
+
+    private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
+        try{
+            if(Tabla_Vacia() == true){
+                JOptionPane.showMessageDialog(this, "No hay ningún empleado registrado.","Aviso.",JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                Clave_modificacion = JOptionPane.showInputDialog("Ingrese clave del empleado a modificar: ");                 
+                
+                if(Clave_repetida(Clave_modificacion) == true){
+                    nuevo4_empleado ventana = new nuevo4_empleado();
+                    ventana.setVisible(true);
+                    this.dispose();
+                }
+                else {
+                    JOptionPane.showMessageDialog(this, "No se encontró el empleado.","Aviso.",JOptionPane.WARNING_MESSAGE);
+                    Clave_modificacion = "";
+                }
+                
+            }
+            
+        }catch(NullPointerException e1){
+            JOptionPane.showMessageDialog(this, "Se ha encontrado un error.");
+        }
+    }//GEN-LAST:event_btModificarActionPerformed
 
     /**
      * @param args the command line arguments

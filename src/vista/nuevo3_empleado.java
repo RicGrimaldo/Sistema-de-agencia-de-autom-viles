@@ -300,7 +300,6 @@ public class nuevo3_empleado extends javax.swing.JFrame {
             double vacaciones = Double.parseDouble(this.txtVacaciones.getText());
             double gratific = Double.parseDouble(this.txtGratificaciones.getText());
             int hrsExtra = Integer.parseInt(this.txtHrsExtra.getText());
-            
 
             if(Clave_repetida(clave) == false){
                 JOptionPane.showMessageDialog(this, "Mecánico "+nombre+" guardado con éxito.","Nuevo mecánico registrado.",JOptionPane.INFORMATION_MESSAGE);
