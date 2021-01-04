@@ -7,6 +7,7 @@ package vista;
 
 import Modelo.*;
 import interfaz_proyectofinal.Interfaz_Proyectofinal;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -130,6 +131,48 @@ public class nuevo2_empleado extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (9).png"))); // NOI18N
         jLabel8.setText("jLabel8");
 
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+        });
+
+        txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyPressed(evt);
+            }
+        });
+
+        txtDias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDiasKeyPressed(evt);
+            }
+        });
+
+        txtSueldoBase.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSueldoBaseKeyPressed(evt);
+            }
+        });
+
+        txtPrestamo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrestamoKeyPressed(evt);
+            }
+        });
+
+        txtTarifaComision.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTarifaComisionKeyPressed(evt);
+            }
+        });
+
+        txtVentas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtVentasKeyPressed(evt);
+            }
+        });
+
         btGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de nombre (2).png"))); // NOI18N
         btGuardar.setText("jButton1");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -141,9 +184,27 @@ public class nuevo2_empleado extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (10).png"))); // NOI18N
         jLabel9.setText("jLabel9");
 
+        txtCochesVendidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCochesVendidosKeyPressed(evt);
+            }
+        });
+
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (18).png"))); // NOI18N
 
+        txtClave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtClaveKeyPressed(evt);
+            }
+        });
+
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (22).png"))); // NOI18N
+
+        txtTasaDescuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTasaDescuentoKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -318,6 +379,108 @@ public class nuevo2_empleado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btGuardarActionPerformed
 
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtApellido.requestFocus(); break;
+            case KeyEvent.VK_RIGHT: 
+                this.txtTarifaComision.requestFocus(); break;
+        }
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtApellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtDias.requestFocus(); break;
+            case KeyEvent.VK_RIGHT: 
+                this.txtVentas.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtNombre.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtApellidoKeyPressed
+
+    private void txtDiasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiasKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtSueldoBase.requestFocus(); break;
+            case KeyEvent.VK_RIGHT: 
+                this.txtCochesVendidos.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtApellido.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtDiasKeyPressed
+
+    private void txtSueldoBaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSueldoBaseKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtPrestamo.requestFocus(); break;
+            case KeyEvent.VK_RIGHT: 
+                this.txtClave.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtDias.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtSueldoBaseKeyPressed
+
+    private void txtPrestamoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrestamoKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtTasaDescuento.requestFocus(); break;
+            case KeyEvent.VK_RIGHT: 
+                this.txtClave.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtSueldoBase.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtPrestamoKeyPressed
+
+    private void txtTasaDescuentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTasaDescuentoKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_RIGHT: 
+                this.txtClave.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtPrestamo.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtTasaDescuentoKeyPressed
+
+    private void txtTarifaComisionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTarifaComisionKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtVentas.requestFocus(); break;
+            case KeyEvent.VK_LEFT: 
+                this.txtNombre.requestFocus(); break;
+        }
+    }//GEN-LAST:event_txtTarifaComisionKeyPressed
+
+    private void txtVentasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVentasKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtCochesVendidos.requestFocus(); break;
+            case KeyEvent.VK_LEFT: 
+                this.txtApellido.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtTarifaComision.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtVentasKeyPressed
+
+    private void txtCochesVendidosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCochesVendidosKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtClave.requestFocus(); break;
+            case KeyEvent.VK_LEFT: 
+                this.txtDias.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtVentas.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtCochesVendidosKeyPressed
+
+    private void txtClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_LEFT: 
+                this.txtSueldoBase.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtCochesVendidos.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtClaveKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -355,10 +518,6 @@ public class nuevo2_empleado extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btGuardar;
-    private javax.swing.JButton btRegresar;
-    private javax.swing.JButton btRegresar1;
-    private javax.swing.JButton btRegresar2;
-    private javax.swing.JButton btRegresar3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

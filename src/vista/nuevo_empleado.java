@@ -7,6 +7,7 @@ package vista;
 
 import Modelo.*;
 import interfaz_proyectofinal.*;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -128,6 +129,53 @@ public class nuevo_empleado extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (7).png"))); // NOI18N
         jLabel8.setText("jLabel8");
 
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+        });
+
+        txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyPressed(evt);
+            }
+        });
+
+        txtDias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDiasKeyPressed(evt);
+            }
+        });
+
+        txtSueldoBase.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSueldoBaseKeyPressed(evt);
+            }
+        });
+
+        txtPrestamo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrestamoKeyPressed(evt);
+            }
+        });
+
+        txtVacaciones.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtVacacionesKeyPressed(evt);
+            }
+        });
+
+        txtGratificaciones.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtGratificacionesKeyPressed(evt);
+            }
+        });
+
         btGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de nombre (2).png"))); // NOI18N
         btGuardar.setText("jButton1");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +186,19 @@ public class nuevo_empleado extends javax.swing.JFrame {
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (22).png"))); // NOI18N
 
+        txtTasaDescuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTasaDescuentoKeyPressed(evt);
+            }
+        });
+
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (18).png"))); // NOI18N
+
+        txtClave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtClaveKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -151,10 +211,13 @@ public class nuevo_empleado extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPrestamo)
-                            .addComponent(txtSueldoBase)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(txtPrestamo))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSueldoBase))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
@@ -218,11 +281,13 @@ public class nuevo_empleado extends javax.swing.JFrame {
                             .addComponent(txtGratificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel13))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
-                                .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtSueldoBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -240,14 +305,13 @@ public class nuevo_empleado extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSueldoBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addComponent(txtPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -318,6 +382,101 @@ public class nuevo_empleado extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btGuardarActionPerformed
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtApellido.requestFocus(); break;
+            case KeyEvent.VK_RIGHT: 
+                this.txtTasaDescuento.requestFocus(); break;
+        }
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtApellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtDias.requestFocus(); break;
+            case KeyEvent.VK_RIGHT: 
+                this.txtVacaciones.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtNombre.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtApellidoKeyPressed
+
+    private void txtDiasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiasKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtSueldoBase.requestFocus(); break;
+            case KeyEvent.VK_RIGHT: 
+                this.txtGratificaciones.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtApellido.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtDiasKeyPressed
+
+    private void txtSueldoBaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSueldoBaseKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtPrestamo.requestFocus(); break;
+            case KeyEvent.VK_RIGHT: 
+                this.txtClave.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtDias.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtSueldoBaseKeyPressed
+
+    private void txtTasaDescuentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTasaDescuentoKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtVacaciones.requestFocus(); break;
+            case KeyEvent.VK_LEFT: 
+                this.txtNombre.requestFocus(); break;
+        }
+    }//GEN-LAST:event_txtTasaDescuentoKeyPressed
+
+    private void txtVacacionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVacacionesKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtGratificaciones.requestFocus(); break;
+            case KeyEvent.VK_LEFT: 
+                this.txtApellido.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtTasaDescuento.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtVacacionesKeyPressed
+
+    private void txtGratificacionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGratificacionesKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtClave.requestFocus(); break;
+            case KeyEvent.VK_LEFT: 
+                this.txtDias.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtVacaciones.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtGratificacionesKeyPressed
+
+    private void txtClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_LEFT: 
+                this.txtSueldoBase.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtGratificaciones.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtClaveKeyPressed
+
+    private void txtPrestamoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrestamoKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_RIGHT: 
+                this.txtClave.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtSueldoBase.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtPrestamoKeyPressed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
 
     /**
      * @param args the command line arguments

@@ -8,6 +8,7 @@ package vista;
 import Modelo.Empleado;
 import Modelo.Vigilante;
 import interfaz_proyectofinal.Interfaz_Proyectofinal;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -131,6 +132,42 @@ public class nuevo5_empleado extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (6).png"))); // NOI18N
         jLabel7.setText("jLabel7");
 
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+        });
+
+        txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyPressed(evt);
+            }
+        });
+
+        txtDias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDiasKeyPressed(evt);
+            }
+        });
+
+        txtSueldoBase.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSueldoBaseKeyPressed(evt);
+            }
+        });
+
+        txtPrestamo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrestamoKeyPressed(evt);
+            }
+        });
+
+        txtVacaciones.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtVacacionesKeyPressed(evt);
+            }
+        });
+
         btGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de nombre (2).png"))); // NOI18N
         btGuardar.setText("jButton1");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -141,8 +178,20 @@ public class nuevo5_empleado extends javax.swing.JFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (18).png"))); // NOI18N
 
+        txtClave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtClaveKeyPressed(evt);
+            }
+        });
+
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (7).png"))); // NOI18N
         jLabel8.setText("jLabel8");
+
+        txtGratificaciones.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtGratificacionesKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -301,6 +350,87 @@ public class nuevo5_empleado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btGuardarActionPerformed
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtApellido.requestFocus(); break;
+            case KeyEvent.VK_RIGHT: 
+                this.txtVacaciones.requestFocus(); break;
+        }
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtApellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtDias.requestFocus(); break;
+            case KeyEvent.VK_RIGHT: 
+                this.txtGratificaciones.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtNombre.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtApellidoKeyPressed
+
+    private void txtDiasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiasKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtSueldoBase.requestFocus(); break;
+            case KeyEvent.VK_RIGHT: 
+                this.txtGratificaciones.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtApellido.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtDiasKeyPressed
+
+    private void txtSueldoBaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSueldoBaseKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtPrestamo.requestFocus(); break;
+            case KeyEvent.VK_RIGHT: 
+                this.txtClave.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtDias.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtSueldoBaseKeyPressed
+
+    private void txtPrestamoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrestamoKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_RIGHT: 
+                this.txtClave.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtSueldoBase.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtPrestamoKeyPressed
+
+    private void txtVacacionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVacacionesKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_DOWN: 
+                this.txtGratificaciones.requestFocus(); break;
+            case KeyEvent.VK_LEFT: 
+                this.txtNombre.requestFocus(); break;
+        }
+    }//GEN-LAST:event_txtVacacionesKeyPressed
+
+    private void txtGratificacionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGratificacionesKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_UP: 
+                this.txtVacaciones.requestFocus(); break;
+            case KeyEvent.VK_LEFT: 
+                this.txtApellido.requestFocus(); break;
+            case KeyEvent.VK_DOWN:
+                this.txtClave.requestFocus(); break;
+                
+        }
+    }//GEN-LAST:event_txtGratificacionesKeyPressed
+
+    private void txtClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveKeyPressed
+        switch(evt.getExtendedKeyCode()){
+            case KeyEvent.VK_LEFT: 
+                this.txtSueldoBase.requestFocus(); break;
+            case KeyEvent.VK_UP:
+                this.txtGratificaciones.requestFocus();break;
+        }
+    }//GEN-LAST:event_txtClaveKeyPressed
 
     /**
      * @param args the command line arguments
