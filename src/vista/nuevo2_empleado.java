@@ -19,8 +19,8 @@ public class nuevo2_empleado extends javax.swing.JFrame {
      * Creates new form nuevo2_empleado
      */
     public int posicion = 0;
-    public ver2_empleados ventana = new ver2_empleados();
     public boolean bandera = false;
+    public ver2_empleados ventana = new ver2_empleados();
     public nuevo2_empleado() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
@@ -30,7 +30,7 @@ public class nuevo2_empleado extends javax.swing.JFrame {
     public void inicializarDatos(){  
         try{
             while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
-            if(ver2_empleados.Clave_modificacion.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
+            if(ventana.Clave_modificacion.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
                 this.txtNombre.setText(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
                 this.txtApellido.setText(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
                 this.txtDias.setText(String.valueOf(((Vendedor)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getDias()));

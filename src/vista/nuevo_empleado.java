@@ -28,7 +28,8 @@ public class nuevo_empleado extends javax.swing.JFrame {
     }
     
     public void inicializarDatos(){  
-        while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
+        try{
+            while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
             if(ventana.Clave_modificacion.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
                 this.txtNombre.setText(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
                 this.txtApellido.setText(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
@@ -47,6 +48,9 @@ public class nuevo_empleado extends javax.swing.JFrame {
             posicion++;
         }
         ventana.Clave_modificacion = "";
+        }catch(ClassCastException e1){
+        JOptionPane.showMessageDialog(this, "Ha ocurrido un error.");
+    }
     }
     
     private boolean Clave_repetida(String clave){
