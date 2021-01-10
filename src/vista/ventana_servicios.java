@@ -123,6 +123,11 @@ public class ventana_servicios extends javax.swing.JFrame {
         btNuevaFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de Copia de Copia de Sin título (18).png"))); // NOI18N
         btNuevaFactura.setText("jButton5");
         btNuevaFactura.setFocusable(false);
+        btNuevaFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNuevaFacturaActionPerformed(evt);
+            }
+        });
 
         btVerFacturas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de Copia de Copia de Sin título (17).png"))); // NOI18N
         btVerFacturas.setText("jButton5");
@@ -208,6 +213,12 @@ public class ventana_servicios extends javax.swing.JFrame {
         this.dispose();
         Ventana_ventas.setVisible(true);
     }//GEN-LAST:event_btVentasActionPerformed
+
+    private void btNuevaFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevaFacturaActionPerformed
+        nuevo_fact_serv Ventana_facturas = new nuevo_fact_serv();
+        this.dispose();
+        Ventana_facturas.setVisible(true);
+    }//GEN-LAST:event_btNuevaFacturaActionPerformed
 
     /**
      * @param args the command line arguments

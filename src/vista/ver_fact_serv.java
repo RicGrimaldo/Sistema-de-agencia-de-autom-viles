@@ -5,18 +5,23 @@
  */
 package vista;
 
+import Modelo.FacturaServicio;
+import Tablas.TablaFacturaServicio;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author asha2
  */
 public class ver_fact_serv extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ver_fact_serv
-     */
+     DefaultTableModel modelo;
     public ver_fact_serv() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
+        modelo = (DefaultTableModel) tblTablaFacturas.getModel();
+        llenarTabla();
     }
 
     /**
@@ -36,8 +41,7 @@ public class ver_fact_serv extends javax.swing.JFrame {
         btFacServicios = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaFacturas = new javax.swing.JTable();
-        btModificar = new javax.swing.JButton();
+        tblTablaFacturas = new javax.swing.JTable();
         btLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -126,26 +130,29 @@ public class ver_fact_serv extends javax.swing.JFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
 
-        TablaFacturas.setModel(new javax.swing.table.DefaultTableModel(
+        tblTablaFacturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Clave", "Nombre del servicio", "Monto de pago", "% extra"
             }
         ));
-        jScrollPane1.setViewportView(TablaFacturas);
-
-        btModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de Copia de Copia de Copia de Sin título (2).png"))); // NOI18N
-        btModificar.setText("jButton5");
-        btModificar.setFocusable(false);
+        tblTablaFacturas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblTablaFacturasKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblTablaFacturas);
 
         btLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de Copia de Copia de Copia de Sin título (4).png"))); // NOI18N
         btLimpiar.setText("jButton5");
         btLimpiar.setFocusable(false);
+        btLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -156,8 +163,6 @@ public class ver_fact_serv extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1234, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -167,11 +172,9 @@ public class ver_fact_serv extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -223,6 +226,30 @@ public class ver_fact_serv extends javax.swing.JFrame {
         Ventana_servicios.setVisible(true);
     }//GEN-LAST:event_btFacServiciosActionPerformed
 
+    private void tblTablaFacturasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblTablaFacturasKeyReleased
+        int fila = tblTablaFacturas.getSelectedRow();
+        FacturaServicio nuevo = TablaFacturaServicio.ListaFacturas.get(fila);
+        if(evt.getKeyCode() == 10){
+            double montopago = Double.parseDouble(modelo.getValueAt(fila, 2).toString());
+            double porcentajeextra = Double.parseDouble(modelo.getValueAt(fila, 3).toString());
+            nuevo.setClave(modelo.getValueAt(fila, 0).toString());
+            nuevo.setNombreServicio(modelo.getValueAt(fila, 1).toString());
+            nuevo.setMontoPago(montopago);
+            nuevo.setPorcentajeExtra(porcentajeextra);
+            
+            JOptionPane.showMessageDialog(null, "Se ha modificado con exito ", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_tblTablaFacturasKeyReleased
+
+    private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
+        int opcion = 0;
+        opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer limpiar la tabla?","Aviso.",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(opcion == JOptionPane.YES_OPTION){
+            limpiarTabla();
+            JOptionPane.showMessageDialog(this, "La limpieza ha sido un éxito.");
+        }        
+    }//GEN-LAST:event_btLimpiarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -259,16 +286,33 @@ public class ver_fact_serv extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TablaFacturas;
     private javax.swing.JButton btEmpleados;
     private javax.swing.JButton btFacServicios;
     private javax.swing.JButton btInicio;
     private javax.swing.JButton btLimpiar;
     private javax.swing.JButton btModelos;
-    private javax.swing.JButton btModificar;
     private javax.swing.JButton btVentas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblTablaFacturas;
     // End of variables declaration//GEN-END:variables
+private void llenarTabla(){
+   //TablaVentas.ListaVentas.add(Pedidos); 
+   for(int i=0; i<TablaFacturaServicio.ListaFacturas.size();i++){
+       Object[] arreglo = new Object[6];
+       FacturaServicio nuevo = TablaFacturaServicio.ListaFacturas.get(i);
+       arreglo[0] = nuevo.getClave();
+       arreglo[1] = nuevo.getNombreServicio();
+       arreglo[2] = nuevo.getMontoPago();
+       arreglo[3] = nuevo.getPorcentajeExtra();
+       modelo.addRow(arreglo);
+   }
+}
+private void limpiarTabla(){
+    for(int i=0;i<modelo.getRowCount();i++){
+        modelo.removeRow(0);
+    }
+    TablaFacturaServicio.ListaFacturas.clear();
+}
 }

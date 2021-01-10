@@ -60,7 +60,7 @@ public class FacturaServicio implements PorPagar{
     }
 
     public void setPorcentajeExtra(double porcentajeExtra) {
-        this.porcentajeExtra = porcentajeExtra;
+        this.porcentajeExtra = porcentajeExtra/100;
     }
     
     @Override

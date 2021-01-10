@@ -5,6 +5,15 @@
  */
 package vista;
 
+import Modelo.Empleado;
+import Modelo.Vendedor;
+import Modelo.Ventas;
+import Tablas.TablaVentas;
+import Utilidades.ColoresCarro;
+import Utilidades.Validador;
+import interfaz_proyectofinal.Interfaz_Proyectofinal;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author asha2
@@ -16,7 +25,18 @@ public class nueva_venta extends javax.swing.JFrame {
      */
     public nueva_venta() {
         initComponents();
+        for (int i = 0; i < Interfaz_Proyectofinal.listaEmpleados.size(); i++) {
+            if(Interfaz_Proyectofinal.listaEmpleados.get(i)instanceof Vendedor){
+                 Empleado nuevo = Interfaz_Proyectofinal.listaEmpleados.get(i);
+            System.out.println(nuevo.getNombre());
+            CmbEmpleados.addItem(nuevo.getNombre());
+            }          
+        }
+        
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
+        llenarColores(0);
+        
+
     }
 
     /**
@@ -36,13 +56,13 @@ public class nueva_venta extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtCliente = new javax.swing.JTextField();
-        txtVendedor = new javax.swing.JTextField();
         txtPrecioCarro = new javax.swing.JTextField();
-        txtColor = new javax.swing.JTextField();
         btGuardar = new javax.swing.JButton();
-        ComboBoxCarro = new javax.swing.JComboBox<>();
+        CmbCarro = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         txtClave = new javax.swing.JTextField();
+        CmbEmpleados = new javax.swing.JComboBox<>();
+        CmbColor = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +87,18 @@ public class nueva_venta extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (17).png"))); // NOI18N
 
+        txtCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtClienteKeyReleased(evt);
+            }
+        });
+
+        txtPrecioCarro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPrecioCarroKeyReleased(evt);
+            }
+        });
+
         btGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de nombre (2).png"))); // NOI18N
         btGuardar.setText("jButton1");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -75,9 +107,32 @@ public class nueva_venta extends javax.swing.JFrame {
             }
         });
 
-        ComboBoxCarro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CUPRA Ateca", "León CUPRA", "CUPRA E-Racer", "CUPRA TCR" }));
+        CmbCarro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CUPRA Ateca", "León CUPRA", "CUPRA E-Racer", "CUPRA TCR" }));
+        CmbCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CmbCarroActionPerformed(evt);
+            }
+        });
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nombre (18).png"))); // NOI18N
+
+        txtClave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtClaveKeyReleased(evt);
+            }
+        });
+
+        CmbEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CmbEmpleadosActionPerformed(evt);
+            }
+        });
+
+        CmbColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CmbColorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -90,34 +145,34 @@ public class nueva_venta extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(23, 23, 23)
                         .addComponent(txtCliente))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtColor)
-                            .addComponent(txtPrecioCarro)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtVendedor)
-                            .addComponent(ComboBoxCarro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CmbCarro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CmbEmpleados, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(CmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtPrecioCarro))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(73, 73, 73)
                         .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(133, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(113, 113, 113))
         );
@@ -139,13 +194,13 @@ public class nueva_venta extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CmbEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboBoxCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19))
+                            .addComponent(CmbCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,17 +210,14 @@ public class nueva_venta extends javax.swing.JFrame {
                     .addComponent(txtPrecioCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                        .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26))))
         );
 
@@ -184,8 +236,77 @@ public class nueva_venta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        // TODO add your handling code here:
+        try {
+            Validador validar = new Validador();
+            String cliente = txtCliente.getText();
+            String vendedor = CmbCarro.getSelectedItem().toString();
+            String clave = txtClave.getText();
+            String modelo = CmbCarro.getSelectedItem().toString();
+            double precio = 0.0;
+            precio = validar.convertirNumero(txtPrecioCarro);
+            Ventas Pedidos = new Ventas();
+
+            if (validar.validarCampoTexto(clave) && validar.validarCampoTexto(vendedor) && validar.validarCampoTexto(cliente)&& validar.validarCampoTexto(modelo)&& validar.validarNumero(precio+"")) {
+                Pedidos.setNombreComprador(cliente);
+                Pedidos.setNombreVendedor(vendedor);
+                Pedidos.setClave(clave);
+                Pedidos.setModeloCarro(modelo);
+                Pedidos.setPrecioAuto(txtPrecioCarro.getText());
+            } 
+            Pedidos.setColorAuto(CmbColor.getSelectedItem().toString());
+            
+
+            TablaVentas.ListaVentas.add(Pedidos);
+            JOptionPane.showMessageDialog(null, "Venta guardada con éxito");
+            
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otra venta?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
+            if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
+                ventana_ventas Ventana_ventas = new ventana_ventas();
+                this.dispose();
+                Ventana_ventas.setVisible(true);
+            }
+        }catch(Exception e){
+           JOptionPane.showMessageDialog(null, "Completa los campos correctamente\n", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_btGuardarActionPerformed
+
+    private void CmbEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbEmpleadosActionPerformed
+        
+    }//GEN-LAST:event_CmbEmpleadosActionPerformed
+
+    private void CmbCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbCarroActionPerformed
+        int posicion = CmbCarro.getSelectedIndex();
+        llenarColores(posicion);
+    }//GEN-LAST:event_CmbCarroActionPerformed
+
+    private void CmbColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbColorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CmbColorActionPerformed
+
+    private void txtClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteKeyReleased
+        //System.out.println(""+evt.getKeyCode()); 
+        if(evt.getKeyCode() == 40){
+            txtPrecioCarro.requestFocus();
+        }
+    }//GEN-LAST:event_txtClienteKeyReleased
+
+    private void txtPrecioCarroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCarroKeyReleased
+        switch(evt.getKeyCode()){
+            case 40:
+                txtClave.requestFocus();
+                break;
+            case 38:
+                txtCliente.requestFocus();
+                break;
+        }
+    }//GEN-LAST:event_txtPrecioCarroKeyReleased
+
+    private void txtClaveKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveKeyReleased
+        if(evt.getKeyCode() == 38){
+            txtPrecioCarro.requestFocus();
+        }
+    }//GEN-LAST:event_txtClaveKeyReleased
 
     /**
      * @param args the command line arguments
@@ -223,7 +344,9 @@ public class nueva_venta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComboBoxCarro;
+    private javax.swing.JComboBox<String> CmbCarro;
+    private javax.swing.JComboBox<String> CmbColor;
+    private javax.swing.JComboBox<String> CmbEmpleados;
     private javax.swing.JButton btGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -235,8 +358,17 @@ public class nueva_venta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtClave;
     private javax.swing.JTextField txtCliente;
-    private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtPrecioCarro;
-    private javax.swing.JTextField txtVendedor;
     // End of variables declaration//GEN-END:variables
+
+    private void llenarColores(int i){
+        CmbColor.removeAllItems();
+        ColoresCarro color = new ColoresCarro();
+        String[] colores = color.arreglocolores[i];
+        //System.out.println(colores);
+        for (int x=0; x<colores.length; x++){
+            String nombreColor = colores[x];
+            CmbColor.addItem(nombreColor);
+        }
+    }
 }

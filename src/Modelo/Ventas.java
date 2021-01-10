@@ -60,6 +60,10 @@ public class Ventas {
     
     //Métodos set
 
+    public void setClave(String clave) {
+        this.clave = clave;
+    }    
+    
     public void setNombreComprador(String nombreComprador) {
         this.nombreComprador = nombreComprador;
     }
