@@ -12,8 +12,8 @@ package Utilidades;
 public class ColoresCarro {
     public String [][] arreglocolores = {
         {"Rojo", "Negro", "Gris"},
-        {"Color1", "Color2", "Color3"},
-        {"negro3", "rojo3", "blanco3"},
+        {"Plateado", "Rojo", "Blanco"},
+        {"Blanco"},
         {"Gris", "Rojo", "Blanco"}
     };
     

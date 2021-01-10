@@ -206,6 +206,12 @@ public class nuevo_fact_serv extends javax.swing.JFrame {
                 this.dispose();
                 Ventana_servicios.setVisible(true);
             }
+            else{
+                this.txtClave.setText("");
+                this.txtMontoPago.setText("");
+                this.txtPorcentajeExtra.setText("");
+                this.txtServicio.setText("");
+            }
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Completa los campos correctamente\n");

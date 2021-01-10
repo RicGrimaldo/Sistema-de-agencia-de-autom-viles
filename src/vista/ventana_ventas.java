@@ -5,6 +5,11 @@
  */
 package vista;
 
+import Modelo.Vendedor;
+import interfaz_proyectofinal.Interfaz_Proyectofinal;
+import javax.swing.JOptionPane;
+import vista.ver2_empleados;
+
 /**
  *
  * @author asha2
@@ -18,6 +23,17 @@ public class ventana_ventas extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
     }
+    
+    private boolean Tabla_Vacia(){
+        boolean bandera = true;
+        for(int i=0;i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
+            if(Interfaz_Proyectofinal.listaEmpleados.get(i) instanceof Vendedor){
+                bandera = false;
+                break;
+            }
+        }
+        return bandera;
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -235,9 +251,15 @@ public class ventana_ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_btFacServiciosActionPerformed
 
     private void btNueva_VentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNueva_VentaActionPerformed
-        nueva_venta Ventana2 = new nueva_venta();
-        this.dispose();
-        Ventana2.setVisible(true);
+        if(Tabla_Vacia() == true){
+                JOptionPane.showMessageDialog(this, "No hay ningún vendedor registrado.","Aviso.",JOptionPane.WARNING_MESSAGE);
+            }
+        else{
+            nueva_venta Ventana2 = new nueva_venta();
+            this.dispose();
+            Ventana2.setVisible(true);            
+        }
+        
     }//GEN-LAST:event_btNueva_VentaActionPerformed
 
     /**
