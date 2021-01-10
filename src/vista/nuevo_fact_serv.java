@@ -214,7 +214,7 @@ public class nuevo_fact_serv extends javax.swing.JFrame {
             }
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Completa los campos correctamente\n");
+            JOptionPane.showMessageDialog(null, "Es necesario completar todos los campos correctamente\n");
         }
     }//GEN-LAST:event_btGuardarActionPerformed
 

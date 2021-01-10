@@ -265,6 +265,11 @@ public class nueva_venta extends javax.swing.JFrame {
                 this.dispose();
                 Ventana_ventas.setVisible(true);
             }
+            else{
+                this.txtCliente.setText("");
+                this.txtClave.setText("");
+                this.txtPrecioCarro.setText("");
+            }
         }catch(Exception e){
            JOptionPane.showMessageDialog(null, "Completa los campos correctamente\n", "Error", JOptionPane.WARNING_MESSAGE);
         }
