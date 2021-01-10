@@ -21,14 +21,17 @@ public class nuevo5_empleado extends javax.swing.JFrame {
      * Creates new form nuevo5_empleado
      */
     public int posicion = 0;
-    public boolean bandera = false;
     public ver5_empleados ventana = new ver5_empleados();
+    //Se crea una ventana de ver5 (vigilante) para recuperar la clave en caso de querer modificar un empleado
     public nuevo5_empleado() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
         inicializarDatos();   
     }
     
+    //Su función es la misma que las otras clases
+    //Se recorre la lista (únicamente de vigilante) para encontrar un empleado cuya clave 
+    //coincida con la clave que se pasó como parámetro
     public void inicializarDatos(){  
         try{           
             while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
@@ -42,7 +45,6 @@ public class nuevo5_empleado extends javax.swing.JFrame {
                     this.txtPrestamo.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getPrestamo()));
                     this.txtVacaciones.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getVacaciones()));
                     this.txtGratificaciones.setText(String.valueOf(((Vigilante)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getGratific()));
-                    bandera = true;                                
                     Interfaz_Proyectofinal.listaEmpleados.remove(posicion);                
                     break;
                 }            
@@ -55,6 +57,7 @@ public class nuevo5_empleado extends javax.swing.JFrame {
     }
     }
     
+    //Método necesario para validar que el empleado a guardar no tenga una clave repetida de algún otro empleado vigilante    
     private boolean Clave_repetida(String clave){
         boolean repetido = false;
         
@@ -67,6 +70,8 @@ public class nuevo5_empleado extends javax.swing.JFrame {
         }        
         return repetido;
     }
+    
+    //Método para limpiar los campos de texto 
     private void LimpiarCampos(){
         this.txtClave.setText("");
         this.txtNombre.setText("");
@@ -318,7 +323,7 @@ public class nuevo5_empleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        try{
+        try{//Se guardan en variables lo registrado en las cajas de texto
             String clave = this.txtClave.getText();
             String nombre = this.txtNombre.getText();
             String apellido = this.txtApellido.getText();
@@ -328,24 +333,29 @@ public class nuevo5_empleado extends javax.swing.JFrame {
             double gratific = Double.parseDouble(this.txtGratificaciones.getText());
             double vacaciones = Double.parseDouble(this.txtVacaciones.getText());     
             
+            //Se lanzará un error personalizado en el caso de que se pongan números negativos     
             if(dias <= 0 || sueldoBase<= 0 || prestamo<=0 ||  gratific<0){
                 throw new RuntimeException();
             }
 
+            //En caso que no se haya registrado un empleado con la misma clave, se guardará el empleado
             if(Clave_repetida(clave) == false){
                 JOptionPane.showMessageDialog(this, "Empleado de vigilancia "+nombre+"\nguardado con éxito.","Mantenimiento y vigilancia.",JOptionPane.INFORMATION_MESSAGE);
                 this.LimpiarCampos();
 
+                //Se hace uso del polimorfismo, creando un tipo empleado con parámetros de vigilante
                 Empleado empleado = new Vigilante(clave,nombre,apellido,dias,sueldoBase,prestamo,gratific,vacaciones);
                 Interfaz_Proyectofinal.listaEmpleados.add(empleado);      
+                //Se guarda en el arraylist de empleados       
                 int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otro empleado?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
-                if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
+                //En el caso de que se haya seleccionado "No", se cerrará dicha ventana y se abrirá la de empleados                
+                if(opcion == JOptionPane.NO_OPTION){
                     ventana_empleados Ventana_empleados = new ventana_empleados();
                     this.dispose();
                     Ventana_empleados.setVisible(true);
                 }//Cierra la ventana
             }
-            else{
+            else{//Significa que ya se ha registrado un empleado del mismo tipo con la misma clave
                 JOptionPane.showMessageDialog(this, "Ya existe un empleado con la clave " + clave,"Error al intentar registrar empleado.",JOptionPane.WARNING_MESSAGE);                                
             }
             
@@ -359,6 +369,7 @@ public class nuevo5_empleado extends javax.swing.JFrame {
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        //Dependiendo de la tecla presionada, se dirigirá y seleccionará al siguiente campo de texto
         switch(evt.getExtendedKeyCode()){
             case KeyEvent.VK_DOWN: 
                 this.txtApellido.requestFocus(); break;

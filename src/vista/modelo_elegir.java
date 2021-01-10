@@ -109,6 +109,7 @@ public class modelo_elegir extends javax.swing.JFrame {
     }//GEN-LAST:event_ComboBoxActionPerformed
 
     private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
+        //Dependiendo del tipo de modelo seleccionado, se abrirá su respectiva ventana
         if(((String)ComboBox.getSelectedItem()).equals("CUPRA Ateca") == true){
             Ventana_Modelos ventana = new Ventana_Modelos();
             this.dispose();

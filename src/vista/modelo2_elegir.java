@@ -105,6 +105,7 @@ public class modelo2_elegir extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
+        //Dependiendo del tipo de modelo seleccionado, se abrirá su respectiva ventana
         if(((String)ComboBox.getSelectedItem()).equals("CUPRA E-Racer") == true){
             modelo_eracer ventana_eracer = new modelo_eracer();
             this.dispose();

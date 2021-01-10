@@ -162,6 +162,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEmpleadosActionPerformed
+        //Dependiendo del botón pulsado, se abrirá la respectiva ventana
         ventana_empleados Ventana_empleados = new ventana_empleados();
         this.dispose();
         Ventana_empleados.setVisible(true);

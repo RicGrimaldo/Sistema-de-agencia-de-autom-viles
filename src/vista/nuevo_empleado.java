@@ -21,46 +21,56 @@ public class nuevo_empleado extends javax.swing.JFrame {
      */
     public int posicion = 0;
     public ver_empleados ventana = new ver_empleados();
-    public boolean bandera = false;
+    //Se crea una ventana de ver (administrativo) para recuperar la clave en caso de querer modificar un empleado
     public nuevo_empleado() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
+        //Método para llenar datos en caso que se haya decidido modificar algún empleado
         inicializarDatos();   
     }
     
     public void inicializarDatos(){  
-        try{
+        try{//Recorremos la lista de empleados
             while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
+                //Haciendo uso del polimorfismo, recorremos únicamente los de tipo administrativo
+                //Se usa la clave para identificar al empleado a modificar
                 if(Interfaz_Proyectofinal.listaEmpleados.get(posicion)instanceof Administrativos){
+                    //Sólo en el caso de que coincidan la clave con la del empleado buscado, los campos de texto
+                    //se llenarán con sus respectivos datos, listos para ser modificados
                     if(ventana.Clave_modificacion.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
-                    this.txtNombre.setText(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
-                    this.txtApellido.setText(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
-                    String dias = String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getDias());
-                    this.txtDias.setText(dias);
-                    this.txtClave.setText(ventana.Clave_modificacion);
-                    this.txtSueldoBase.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getSueldoBase()));
-                    this.txtPrestamo.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getPrestamo()));
-                    this.txtTasaDescuento.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getTasaDescInfona()));
-                    this.txtVacaciones.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getVacaciones()));
-                    this.txtGratificaciones.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getGratific()));
-                    bandera = true;                                
-                    Interfaz_Proyectofinal.listaEmpleados.remove(posicion);                
-                    break;
+                        //Se recuperan los datos
+                        this.txtNombre.setText(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
+                        this.txtApellido.setText(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
+                        String dias = String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getDias());
+                        this.txtDias.setText(dias);
+                        this.txtClave.setText(ventana.Clave_modificacion);
+                        this.txtSueldoBase.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getSueldoBase()));
+                        this.txtPrestamo.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getPrestamo()));
+                        this.txtTasaDescuento.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getTasaDescInfona()));
+                        this.txtVacaciones.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getVacaciones()));
+                        this.txtGratificaciones.setText(String.valueOf(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getGratific()));
+                        Interfaz_Proyectofinal.listaEmpleados.remove(posicion); 
+                        //Se quitará el empleado de la lista para poder ser modificado
+                        break;//Ya ha sido encontrado el empleado, por lo que ya no es necesario seguir con la lista
                 }            
             }
             posicion++;
+            //Contador necesario que se actualizará hasta obtener la posición del empleado a modificar
         }
         ventana.Clave_modificacion = "";
+        //Se vacía la cadena de la clave de modificación en el caso que se quiera modificar algún otro empleado
         }catch(ClassCastException e1){
         JOptionPane.showMessageDialog(this, "Ha ocurrido un error.");
     }
     }
     
+    //Método necesario para validar que el empleado a guardar no tenga una clave repetida de algún otro empleado
     private boolean Clave_repetida(String clave){
         boolean repetido = false;
         
         for(int i = 0; i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
             if(Interfaz_Proyectofinal.listaEmpleados.get(i)instanceof Administrativos){
+                //Pueden tener la misma clave si son de distintas clases de empleado
                 if(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getClave().equals(clave)){
                    repetido = true;
                 }
@@ -332,6 +342,7 @@ public class nuevo_empleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Método para limpiar los campos de texto 
     private void LimpiarCampos(){
         this.txtNombre.setText("");
         this.txtApellido.setText("");
@@ -345,7 +356,8 @@ public class nuevo_empleado extends javax.swing.JFrame {
     }
     
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        try{            
+        try{   
+            //Se guardan en variables lo registrado en las cajas de texto
             String clave = this.txtClave.getText();
             String nombre = this.txtNombre.getText();
             String apellido = this.txtApellido.getText();
@@ -356,24 +368,30 @@ public class nuevo_empleado extends javax.swing.JFrame {
             double vacaciones = Double.parseDouble(this.txtVacaciones.getText());
             double gratific = Double.parseDouble(this.txtGratificaciones.getText());
             
+            //Se lanzará un error personalizado en el caso de que se pongan números negativos
             if(dias <= 0 || sueldoBase<= 0 || prestamo<=0 || tasaDescInfona<=0 || vacaciones<=0 || gratific<=0){
                 throw new RuntimeException();
             }
 
+            //En caso que no se haya registrado un empleado con la misma clave, se guardará el empleado
             if(Clave_repetida(clave) == false){
                 JOptionPane.showMessageDialog(this, "Administrativo "+nombre+" guardado con éxito.","Nuevo empleado administrativo.",JOptionPane.INFORMATION_MESSAGE);
-                this.LimpiarCampos();
+                this.LimpiarCampos();//Se limpian los campos una vez guardado el empleado
 
+                //Se hace uso del polimorfismo, creando un tipo empleado con parámetros de administrativo
                 Empleado empleado = new Administrativos(clave,nombre,apellido,dias,sueldoBase,prestamo,tasaDescInfona,vacaciones,gratific);
+                //Se guarda en el arraylist de empleados
                 Interfaz_Proyectofinal.listaEmpleados.add(empleado);
+                
                 int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otro empleado?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
-                if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
+                if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "No", se cerrará dicha ventana y se abrirá la de empleados
                     ventana_empleados Ventana_empleados = new ventana_empleados();
                     this.dispose();
                     Ventana_empleados.setVisible(true);
                 }//Cierra la ventana
             }
             else{
+                //Significa que ya se ha registrado un empleado del mismo tipo con la misma clave
                 JOptionPane.showMessageDialog(this, "Ya existe un empleado con la clave " + clave,"Error al intentar registrar empleado.",JOptionPane.WARNING_MESSAGE);
             }
             
@@ -391,6 +409,7 @@ public class nuevo_empleado extends javax.swing.JFrame {
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        //Dependiendo de la tecla presionada, se dirigirá y seleccionará al siguiente campo de texto
         switch(evt.getExtendedKeyCode()){
             case KeyEvent.VK_DOWN: 
                 this.txtApellido.requestFocus(); break;
