@@ -355,6 +355,10 @@ public class nuevo2_empleado extends javax.swing.JFrame {
             double tarifaComision = Double.parseDouble(this.txtTarifaComision.getText());
             double ventas = Double.parseDouble(this.txtVentas.getText());
             int autosVendidos = Integer.parseInt(this.txtCochesVendidos.getText());
+            
+            if(dias <= 0 || sueldoBase<= 0 || prestamo<=0 || tasaDescInfona<=0 || tarifaComision<=0 || ventas<0 || autosVendidos<0){
+                throw new RuntimeException();
+            }
 
             if(Clave_repetida(clave) == false){
                 JOptionPane.showMessageDialog(this, "Vendedor "+nombre+" guardado con éxito.","Nuevo vendedor registrado.",JOptionPane.INFORMATION_MESSAGE);
@@ -376,6 +380,9 @@ public class nuevo2_empleado extends javax.swing.JFrame {
         }
         catch(NumberFormatException e1){
             JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
+        }
+        catch (RuntimeException e2){
+            JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente \n(los valores no pueden ser menores o iguales a cero).","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btGuardarActionPerformed
 

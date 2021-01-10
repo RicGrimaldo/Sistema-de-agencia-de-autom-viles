@@ -362,6 +362,10 @@ public class nuevo3_empleado extends javax.swing.JFrame {
             double vacaciones = Double.parseDouble(this.txtVacaciones.getText());
             double gratific = Double.parseDouble(this.txtGratificaciones.getText());
             int hrsExtra = Integer.parseInt(this.txtHrsExtra.getText());
+            
+            if(dias <= 0 || sueldoBase<= 0 || prestamo<=0 || tasaDescInfona<=0 || vacaciones<0 || gratific<0 || hrsExtra<0){
+                throw new RuntimeException();
+            }
 
             if(Clave_repetida(clave) == false){
                 JOptionPane.showMessageDialog(this, "Mecánico "+nombre+" guardado con éxito.","Nuevo mecánico registrado.",JOptionPane.INFORMATION_MESSAGE);
@@ -382,6 +386,9 @@ public class nuevo3_empleado extends javax.swing.JFrame {
         }
         catch(NumberFormatException e1){
             JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
+        }
+        catch (RuntimeException e2){
+            JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente \n(los valores no pueden ser menores o iguales a cero).","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btGuardarActionPerformed
 

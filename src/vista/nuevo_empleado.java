@@ -355,6 +355,10 @@ public class nuevo_empleado extends javax.swing.JFrame {
             double tasaDescInfona = Double.parseDouble(this.txtTasaDescuento.getText());
             double vacaciones = Double.parseDouble(this.txtVacaciones.getText());
             double gratific = Double.parseDouble(this.txtGratificaciones.getText());
+            
+            if(dias <= 0 || sueldoBase<= 0 || prestamo<=0 || tasaDescInfona<=0 || vacaciones<=0 || gratific<=0){
+                throw new RuntimeException();
+            }
 
             if(Clave_repetida(clave) == false){
                 JOptionPane.showMessageDialog(this, "Administrativo "+nombre+" guardado con éxito.","Nuevo empleado administrativo.",JOptionPane.INFORMATION_MESSAGE);
@@ -379,6 +383,9 @@ public class nuevo_empleado extends javax.swing.JFrame {
         }
         catch(ClassCastException e2){
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error al guardar administrativo.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
+        }
+        catch (RuntimeException e3){
+            JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente \n(los valores no pueden ser menores o iguales a cero).","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_btGuardarActionPerformed

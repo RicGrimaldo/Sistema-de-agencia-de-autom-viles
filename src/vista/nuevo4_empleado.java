@@ -330,6 +330,10 @@ public class nuevo4_empleado extends javax.swing.JFrame {
             double gratific = Double.parseDouble(this.txtGratificaciones.getText());
             int hrsExtra = Integer.parseInt(this.txtHrsExtra.getText());
             
+            if(dias <= 0 || sueldoBase<= 0 || prestamo<=0 ||  gratific<0 || hrsExtra<0){
+                throw new RuntimeException();
+            }
+            
             if(Clave_repetida(clave) == false){
                 JOptionPane.showMessageDialog(this, "Empleado de mantenimiento "+nombre+" guardado con éxito.","Mantenimiento y vigilancia.",JOptionPane.INFORMATION_MESSAGE);
                 this.LimpiarCampos();
@@ -350,6 +354,9 @@ public class nuevo4_empleado extends javax.swing.JFrame {
         }
         catch(NumberFormatException e1){
             JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente.","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
+        }
+        catch (RuntimeException e2){
+            JOptionPane.showMessageDialog(this, "Es necesario llenar los campos correctamente \n(los valores no pueden ser menores o iguales a cero).","Advertencia de error.",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btGuardarActionPerformed
 
