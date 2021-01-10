@@ -18,6 +18,7 @@ public class Interfaz_Proyectofinal {
     /**
      * @param args the command line arguments
      */
+    //ArrayList necesario para guardar los empleados
     public static ArrayList<Empleado> listaEmpleados = new ArrayList<Empleado>();        
     
     public static void main(String[] args) {

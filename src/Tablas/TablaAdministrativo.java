@@ -17,11 +17,14 @@ import java.text.DecimalFormat;
  * @author Ricardo Grimaldo
  */
 public class TablaAdministrativo {
+    //El método recibe una tabla del tipo JTable
     public void iniciarTabla(JTable tabla){
-        Vector< Vector<Object> > data = new Vector< Vector<Object> >();
+        //Creamos un objeto "modelo" del tipo DefaultTableModel
         DefaultTableModel modelo = new DefaultTableModel();  
+        //Necesario para imprimir los números con un límite de decimales
         DecimalFormat df = new DecimalFormat("#.0000");
         
+        //Se agregan primero las columnas
         modelo.addColumn("Clave");
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
@@ -33,9 +36,12 @@ public class TablaAdministrativo {
         modelo.addColumn("Gratificaciones");
         modelo.addColumn("Sueldo final");
         
+        //Se recorre el ArrayList de empleados
         for(int i= 0; i< Interfaz_Proyectofinal.listaEmpleados.size(); i++){
+            //Se crea el vector, es decir, la fila a agregar
             Vector<Object> row = new Vector<Object>();
             if(Interfaz_Proyectofinal.listaEmpleados.get(i)instanceof Administrativos){
+                //Únicamente se agregarán los administrativos guardados
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getClave());
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getNombre());
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getApellido());
@@ -46,9 +52,9 @@ public class TablaAdministrativo {
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getVacaciones());
                 row.add(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).getGratific());
                 row.add(df.format(((Administrativos)Interfaz_Proyectofinal.listaEmpleados.get(i)).cantPagar()));
-                modelo.addRow(row); // Aquí se va armando la matriz de datos
+                modelo.addRow(row); // Aquí se va armando la tabla de datos,agregándose el nuevo renglón creado
             }                        
         }      
-        tabla.setModel(modelo);
+        tabla.setModel(modelo);//La función retorna el modelo creado a la tabla recibida
     }
 }
