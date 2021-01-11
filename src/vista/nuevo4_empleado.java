@@ -37,11 +37,11 @@ public class nuevo4_empleado extends javax.swing.JFrame {
         try{           
             while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
                 if(Interfaz_Proyectofinal.listaEmpleados.get(posicion) instanceof Mantenimiento){
-                    if(ventana.Clave_modificacion4.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){              
+                    if(ventana.Clave_modificacion.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){              
                     this.txtNombre.setText(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getNombre());
                     this.txtApellido.setText(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getApellido());
                     this.txtDias.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getDias()));
-                    this.txtClave.setText(ventana.Clave_modificacion4);
+                    this.txtClave.setText(ventana.Clave_modificacion);
                     this.txtSueldoBase.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getSueldoBase()));
                     this.txtPrestamo.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getPrestamo()));                
                     this.txtGratificaciones.setText(String.valueOf(((Mantenimiento)Interfaz_Proyectofinal.listaEmpleados.get(posicion)).getGratific()));
@@ -52,7 +52,7 @@ public class nuevo4_empleado extends javax.swing.JFrame {
                 }            
             posicion++;
         }
-        ventana.Clave_modificacion4 = "";
+        ventana.Clave_modificacion = "";
     }catch(ClassCastException e1){
         JOptionPane.showMessageDialog(this, "Ha ocurrido un error.");
     }

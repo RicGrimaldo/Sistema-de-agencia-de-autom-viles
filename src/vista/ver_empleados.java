@@ -19,31 +19,35 @@ public class ver_empleados extends javax.swing.JFrame {
     /**
      * Creates new form ver_empleados
      */
-    public TablaAdministrativo tabla = new TablaAdministrativo();
-    public int posicion = 0;
-    
+    //Se crea un objeto "tabla" de la clase TablaAdministrativo
+    public TablaAdministrativo tabla = new TablaAdministrativo();    
     
     public ver_empleados() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
-        inicializarTabla();
+        inicializarTabla();//Método para inicializar la tabla con los empleados administrativos registrados
     }
-    public static String Clave_modificacion = "";
+    //Cadena pública necesaria para pasarla como parámetro a la ventana "nuevo_empleado"
+    //y saber qué clave será la del empleado a modificar
+    public static String Clave_modificacion = "";    
     public void inicializarTabla(){
+        //Se llama al método de la clase para llenar la clase TablaAdministrativo para llenar la tabla
         tabla.iniciarTabla(this.TablaAdministrativos);
     }
     
+    //Método para saber si no hay empleados administrativos registrados
     private boolean Tabla_Vacia(){
         boolean bandera = true;
         for(int i=0;i<Interfaz_Proyectofinal.listaEmpleados.size();i++){
             if(Interfaz_Proyectofinal.listaEmpleados.get(i) instanceof Administrativos){
-                bandera = false;
+                bandera = false;//Devuelve false en caso que haya mínimo un empleado administrativo registrado
                 break;
             }
         }
         return bandera;
     }        
     
+    //Método para saber si hay otro administrativo con la misma clave
     private boolean Clave_repetida(String clave){
         boolean repetido = false;
         
@@ -54,6 +58,7 @@ public class ver_empleados extends javax.swing.JFrame {
                 }
             }            
         }        
+        //Devolverá true si ya existe un empleado con dicha clave, false en caso contrario
         return repetido;
     }
 
@@ -276,30 +281,41 @@ public class ver_empleados extends javax.swing.JFrame {
     }//GEN-LAST:event_btFacServiciosActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
+        //Bandera que determina si el empleado ha sido eliminado
         boolean bandera = false;
+        //Variable que guarda la elección del usuario para asegurarse si realmente desea eliminar el empleado
         int opcion = 2; 
-        try{
+        //Variable para saber la posición del empleado a eliminar
+        int posicion = 0;
+        try{//Primero se verifica si la tabla de administrativos está vacía
             if(Tabla_Vacia() == true){
                 JOptionPane.showMessageDialog(this, "No hay ningún empleado registrado.","Aviso.",JOptionPane.WARNING_MESSAGE);
             }
-            else{
+            else{//Se almacena la clave del empleado a eliminar
                 String Clave = JOptionPane.showInputDialog("Ingrese clave del empleado a eliminar: ");
-                if(Clave_repetida(Clave) == true){
+                if(Clave_repetida(Clave) == true){//Primero, se verifica si hay un empleado con esa clave
+                    //Se recorre el arraylist de empleados
                     while(posicion<Interfaz_Proyectofinal.listaEmpleados.size()){
+                        //Si se encuentra una clave que coincida con la clave que se guardó, se ha encontrado al empleado
                         if(Clave.equals(Interfaz_Proyectofinal.listaEmpleados.get(posicion).getClave()) == true){
+                            //Se verifica que sea de tipo administrativo
                             if(Interfaz_Proyectofinal.listaEmpleados.get(posicion) instanceof Administrativos){
+                                //Se pregunta al usuario si realmente desea eliminar dicho empleado
                                 opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer eliminar al empleado "+
                                         Interfaz_Proyectofinal.listaEmpleados.get(posicion).getNombre() +"?","Aviso",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
                                 if(opcion == JOptionPane.YES_OPTION){
+                                    //En caso de que la respuesta sea sí, el empleado se elimina del arrraylist
                                     Interfaz_Proyectofinal.listaEmpleados.remove(posicion);
+                                    //El empleado ha sido eliminado
                                     bandera = true;
                                 }
-                                else {
+                                else {//Significa que no se ha querido eliminar al empleado
                                     bandera = false;
                                     break;
                                 }  
                             }                                
                         }
+                        //Contador para recorrer la lista
                         posicion++;
                 }
                 if(bandera == true){
@@ -307,12 +323,13 @@ public class ver_empleados extends javax.swing.JFrame {
                     tabla.iniciarTabla(TablaAdministrativos);
                 }
                 else{
+                    //En el caso de que se haya puesto una clave inexistente
                     if(bandera == false && opcion == JOptionPane.YES_OPTION){
                     JOptionPane.showMessageDialog(this, "No se ha encontrado el empleado.");
                 }
                 }
                 }
-                else{
+                else{//En el caso que no se haya encontrado el empleado
                     JOptionPane.showMessageDialog(this, "No se encontró el empleado.","Aviso.",JOptionPane.WARNING_MESSAGE);
                 }
                     
@@ -326,19 +343,22 @@ public class ver_empleados extends javax.swing.JFrame {
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
         try{
             if(Tabla_Vacia() == true){
+                //Primero, se verifica si la tabla está vacía
                 JOptionPane.showMessageDialog(this, "No hay ningún empleado registrado.","Aviso.",JOptionPane.WARNING_MESSAGE);
             }
-            else{
+            else{//Al atributo público se le almacena la clave del emplado a modificar
                 Clave_modificacion = JOptionPane.showInputDialog("Ingrese clave del empleado a modificar: ");                 
-                
+                //Primero, se verifica si existe un administrativo con dicha clave
                 if(Clave_repetida(Clave_modificacion) == true){
+                    //En caso de que se encuentre, se abre la ventana para crear un nuevo 
+                    //empleado administrativo, pero para modificar el empleado seleccionado
                     nuevo_empleado ventana = new nuevo_empleado();
                     ventana.setVisible(true);
                     this.dispose();
                 }
-                else {
+                else {//En caso contrario, no se ha registrado ningún empleado con la clave almacenada
                     JOptionPane.showMessageDialog(this, "No se encontró el empleado.","Aviso.",JOptionPane.WARNING_MESSAGE);
-                    Clave_modificacion = "";
+                    Clave_modificacion = "";//Se vacía la cadena para la próxima vez que se desee modificar otro empleado
                 }
                 
             }
