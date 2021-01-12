@@ -15,4 +15,15 @@ import java.util.ArrayList;
 public class TablaVentas {
     public static ArrayList<Ventas> ListaVentas = new ArrayList<Ventas>();
     
+public boolean validarClave(String clave){
+    boolean bandera = true;
+    for(int i=0; i < ListaVentas.size();i++){
+        Ventas V = ListaVentas.get(i);
+        if(V.getClave().equals(clave)){
+            bandera = false;
+            break;
+        }
+    }
+    return bandera;
+}
 }

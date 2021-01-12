@@ -5,8 +5,9 @@
  */
 package Tablas;
 
-
 import Modelo.FacturaServicio;
+import Modelo.Ventas;
+import static Tablas.TablaVentas.ListaVentas;
 import java.util.ArrayList;
 
 /**
@@ -14,5 +15,18 @@ import java.util.ArrayList;
  * @author carlo
  */
 public class TablaFacturaServicio {
+
     public static ArrayList<FacturaServicio> ListaFacturas = new ArrayList<FacturaServicio>();
+
+    public boolean validarClave(String clave) {
+        boolean bandera = true;
+        for (int i = 0; i < ListaFacturas.size(); i++) {
+            FacturaServicio F = ListaFacturas.get(i);
+            if (F.getClave().equals(clave)) {
+                bandera = false;
+                break;
+            }
+        }
+        return bandera;
+    }
 }

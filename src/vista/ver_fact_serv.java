@@ -137,7 +137,15 @@ public class ver_fact_serv extends javax.swing.JFrame {
             new String [] {
                 "Clave", "Nombre del servicio", "Monto de pago", "% extra"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblTablaFacturas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tblTablaFacturasKeyReleased(evt);
@@ -242,12 +250,7 @@ public class ver_fact_serv extends javax.swing.JFrame {
     }//GEN-LAST:event_tblTablaFacturasKeyReleased
 
     private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
-        int opcion = 0;
-        opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer limpiar la tabla?","Aviso.",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-        if(opcion == JOptionPane.YES_OPTION){
-            limpiarTabla();
-            JOptionPane.showMessageDialog(this, "La limpieza ha sido un éxito.");
-        }        
+        limpiarTabla();
     }//GEN-LAST:event_btLimpiarActionPerformed
 
     /**

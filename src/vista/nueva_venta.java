@@ -13,6 +13,7 @@ import Utilidades.ColoresCarro;
 import Utilidades.Validador;
 import interfaz_proyectofinal.Interfaz_Proyectofinal;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -26,16 +27,15 @@ public class nueva_venta extends javax.swing.JFrame {
     public nueva_venta() {
         initComponents();
         for (int i = 0; i < Interfaz_Proyectofinal.listaEmpleados.size(); i++) {
-            if(Interfaz_Proyectofinal.listaEmpleados.get(i)instanceof Vendedor){
-                 Empleado nuevo = Interfaz_Proyectofinal.listaEmpleados.get(i);
-            System.out.println(nuevo.getNombre());
-            CmbEmpleados.addItem(nuevo.getNombre());
-            }          
+            if (Interfaz_Proyectofinal.listaEmpleados.get(i) instanceof Vendedor) {
+                Empleado nuevo = Interfaz_Proyectofinal.listaEmpleados.get(i);
+                System.out.println(nuevo.getNombre());
+                CmbEmpleados.addItem(nuevo.getNombre());
+            }
         }
-        
+
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
         llenarColores(0);
-        
 
     }
 
@@ -239,45 +239,48 @@ public class nueva_venta extends javax.swing.JFrame {
         try {
             Validador validar = new Validador();
             String cliente = txtCliente.getText();
-            String vendedor = CmbEmpleados.getSelectedItem().toString();
+            String vendedor = CmbCarro.getSelectedItem().toString();
             String clave = txtClave.getText();
             String modelo = CmbCarro.getSelectedItem().toString();
             double precio = 0.0;
             precio = validar.convertirNumero(txtPrecioCarro);
             Ventas Pedidos = new Ventas();
 
-            if (validar.validarCampoTexto(clave) && validar.validarCampoTexto(vendedor) && validar.validarCampoTexto(cliente)&& validar.validarCampoTexto(modelo)&& validar.validarNumero(precio+"")) {
-                Pedidos.setNombreComprador(cliente);
-                Pedidos.setNombreVendedor(vendedor);
-                Pedidos.setClave(clave);
-                Pedidos.setModeloCarro(modelo);
-                Pedidos.setPrecioAuto(txtPrecioCarro.getText());
-            } 
-            Pedidos.setColorAuto(CmbColor.getSelectedItem().toString());
-            
+            if (validar.validarCampoTexto(clave) && validar.validarCampoTexto(vendedor) && validar.validarCampoTexto(cliente) && validar.validarCampoTexto(modelo) && validar.validarNumero(precio + "")) {
+                TablaVentas mTablaVentas = new TablaVentas();
+                if (mTablaVentas.validarClave(clave)) {
+                    Pedidos.setNombreComprador(cliente);
+                    Pedidos.setNombreVendedor(vendedor);
+                    Pedidos.setClave(clave);
+                    Pedidos.setModeloCarro(modelo);
+                    Pedidos.setPrecioAuto(txtPrecioCarro.getText());
+                    Pedidos.setColorAuto(CmbColor.getSelectedItem().toString());
 
-            TablaVentas.ListaVentas.add(Pedidos);
-            JOptionPane.showMessageDialog(null, "Venta guardada con éxito");
-            
-            int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otra venta?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
-            if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
-                ventana_ventas Ventana_ventas = new ventana_ventas();
-                this.dispose();
-                Ventana_ventas.setVisible(true);
+                    TablaVentas.ListaVentas.add(Pedidos);
+                    JOptionPane.showMessageDialog(null, "Venta guardada con éxito");
+                    limpiarTexto(txtClave);
+                    limpiarTexto(txtCliente);
+                    limpiarTexto(txtPrecioCarro);
+
+                    int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otra venta?", "Mensaje", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if (opcion == JOptionPane.NO_OPTION) {//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
+                        ventana_ventas Ventana_ventas = new ventana_ventas();
+                        this.dispose();
+                        Ventana_ventas.setVisible(true);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "La clave ya existe");
+                }
             }
-            else{
-                this.txtCliente.setText("");
-                this.txtClave.setText("");
-                this.txtPrecioCarro.setText("");
-            }
-        }catch(Exception e){
-           JOptionPane.showMessageDialog(null, "Completa los campos correctamente\n", "Error", JOptionPane.WARNING_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Completa los campos correctamente\n", "Error", JOptionPane.WARNING_MESSAGE);
         }
 
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void CmbEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbEmpleadosActionPerformed
-        
+
     }//GEN-LAST:event_CmbEmpleadosActionPerformed
 
     private void CmbCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbCarroActionPerformed
@@ -291,13 +294,13 @@ public class nueva_venta extends javax.swing.JFrame {
 
     private void txtClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteKeyReleased
         //System.out.println(""+evt.getKeyCode()); 
-        if(evt.getKeyCode() == 40){
+        if (evt.getKeyCode() == 40) {
             txtPrecioCarro.requestFocus();
         }
     }//GEN-LAST:event_txtClienteKeyReleased
 
     private void txtPrecioCarroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioCarroKeyReleased
-        switch(evt.getKeyCode()){
+        switch (evt.getKeyCode()) {
             case 40:
                 txtClave.requestFocus();
                 break;
@@ -308,7 +311,7 @@ public class nueva_venta extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecioCarroKeyReleased
 
     private void txtClaveKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveKeyReleased
-        if(evt.getKeyCode() == 38){
+        if (evt.getKeyCode() == 38) {
             txtPrecioCarro.requestFocus();
         }
     }//GEN-LAST:event_txtClaveKeyReleased
@@ -366,14 +369,17 @@ public class nueva_venta extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecioCarro;
     // End of variables declaration//GEN-END:variables
 
-    private void llenarColores(int i){
+    private void llenarColores(int i) {
         CmbColor.removeAllItems();
         ColoresCarro color = new ColoresCarro();
         String[] colores = color.arreglocolores[i];
         //System.out.println(colores);
-        for (int x=0; x<colores.length; x++){
+        for (int x = 0; x < colores.length; x++) {
             String nombreColor = colores[x];
             CmbColor.addItem(nombreColor);
         }
+    }
+    private void limpiarTexto(JTextField campoTexto){
+        campoTexto.setText("");
     }
 }

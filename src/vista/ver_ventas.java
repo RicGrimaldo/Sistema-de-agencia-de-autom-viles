@@ -7,6 +7,10 @@ package vista;
 
 import Modelo.Ventas;
 import Tablas.TablaVentas;
+import Utilidades.ColoresCarro;
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class ver_ventas extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
+
     public ver_ventas() {
         initComponents();
         setLocationRelativeTo(null);//Para que al ejecutarse se presente en medio de la pantalla
@@ -220,15 +225,36 @@ public class ver_ventas extends javax.swing.JFrame {
     private void tblTablaVentasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblTablaVentasKeyReleased
         //System.out.println(""+evt.getKeyCode());
         int fila = tblTablaVentas.getSelectedRow();
+        ColoresCarro objColoresCarro = new ColoresCarro();
         Ventas nuevo = TablaVentas.ListaVentas.get(fila);
-        if(evt.getKeyCode() == 10){
-            nuevo.setClave(modelo.getValueAt(fila, 0).toString());
-            nuevo.setNombreComprador(modelo.getValueAt(fila, 1).toString());
-            nuevo.setNombreVendedor(modelo.getValueAt(fila, 2).toString());
-            nuevo.setModeloCarro(modelo.getValueAt(fila, 3).toString());
-            nuevo.setPrecioAuto(modelo.getValueAt(fila, 4).toString());
-            nuevo.setColorAuto(modelo.getValueAt(fila, 5).toString());
-            JOptionPane.showMessageDialog(null, "Se ha modificado con exito ", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        if (evt.getKeyCode() == 10) {
+            String Carromodelo = modelo.getValueAt(fila, 3).toString();
+            int posicion = objColoresCarro.modelosCarro.indexOf(Carromodelo);
+            String[] colores = objColoresCarro.arreglocolores[posicion];
+            ArrayList<String> coloresList = new ArrayList<>();
+            Collections.addAll(coloresList, colores);
+            String color = modelo.getValueAt(fila, 5).toString();
+            if (objColoresCarro.modelosCarro.contains(Carromodelo)) {
+                int posicionColor = JOptionPane.showOptionDialog(null, "Escoge un color", "Color", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, colores, colores[0]);
+                color = colores[posicionColor];
+                if (coloresList.contains(color)) {
+                    nuevo.setClave(modelo.getValueAt(fila, 0).toString());
+                    nuevo.setNombreComprador(modelo.getValueAt(fila, 1).toString());
+                    nuevo.setNombreVendedor(modelo.getValueAt(fila, 2).toString());
+                    nuevo.setPrecioAuto(modelo.getValueAt(fila, 4).toString());
+                    nuevo.setModeloCarro(Carromodelo);
+                    nuevo.setColorAuto(color);
+                    llenarTabla();
+                    JOptionPane.showMessageDialog(null, "Se ha modificado con exito ", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "El color ingresado no es valido", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }
+
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "El modelo ingresado no es valido", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+
         }
     }//GEN-LAST:event_tblTablaVentasKeyReleased
 
@@ -278,18 +304,21 @@ public class ver_ventas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblTablaVentas;
     // End of variables declaration//GEN-END:variables
-private void llenarTabla(){
-   //TablaVentas.ListaVentas.add(Pedidos); 
-   for(int i=0; i<TablaVentas.ListaVentas.size();i++){
-       Object[] arreglo = new Object[6];
-       Ventas nuevo = TablaVentas.ListaVentas.get(i);
-       arreglo[0] = nuevo.getClave();
-       arreglo[1] = nuevo.getNombreComprador();
-       arreglo[2] = nuevo.getNombreVendedor();
-       arreglo[3] = nuevo.getModeloCarro();
-       arreglo[4] = nuevo.getPrecioAuto();
-       arreglo[5] = nuevo.getColorAuto();
-       modelo.addRow(arreglo);
-   }
-}
+private void llenarTabla() {
+        //TablaVentas.ListaVentas.add(Pedidos); 
+        for(int i=0;i < modelo.getRowCount();i++){
+            modelo.removeRow(0);
+        }
+        for (int i = 0; i < TablaVentas.ListaVentas.size(); i++) {
+            Object[] arreglo = new Object[6];
+            Ventas nuevo = TablaVentas.ListaVentas.get(i);
+            arreglo[0] = nuevo.getClave();
+            arreglo[1] = nuevo.getNombreComprador();
+            arreglo[2] = nuevo.getNombreVendedor();
+            arreglo[3] = nuevo.getModeloCarro();
+            arreglo[4] = nuevo.getPrecioAuto();
+            arreglo[5] = nuevo.getColorAuto();
+            modelo.addRow(arreglo);
+        }
+    }
 }

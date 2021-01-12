@@ -184,7 +184,7 @@ public class nuevo_fact_serv extends javax.swing.JFrame {
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         try {
-             Validador validar = new Validador();
+            Validador validar = new Validador();
             FacturaServicio NuevaFactura = new FacturaServicio();
             double MontoPago = 0.0;
             double PorcentajeExtra = 0.0;
@@ -192,40 +192,50 @@ public class nuevo_fact_serv extends javax.swing.JFrame {
             String servicio = txtServicio.getText();
             MontoPago = validar.convertirNumero(txtMontoPago);
             PorcentajeExtra = validar.convertirNumero(txtPorcentajeExtra);
+
             if (validar.validarCampoTexto(clave) && validar.validarCampoTexto(servicio) && validar.validarNumero(MontoPago + "") && validar.validarNumero(PorcentajeExtra + "")) {
-                NuevaFactura.setClave(clave);
-                NuevaFactura.setNombreServicio(servicio);
-            } 
-            
-            TablaFacturaServicio.ListaFacturas.add(NuevaFactura);
-            JOptionPane.showMessageDialog(null, "Factura guardada con éxito");
-            
-            int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otra Factura/Servicio?","Mensaje",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);        
-            if(opcion == JOptionPane.NO_OPTION){//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
-                ventana_servicios Ventana_servicios = new ventana_servicios();
-                this.dispose();
-                Ventana_servicios.setVisible(true);
+                TablaFacturaServicio factura = new TablaFacturaServicio();
+                if (factura.validarClave(clave)) {
+                    NuevaFactura.setClave(clave);
+                    NuevaFactura.setNombreServicio(servicio);
+                    NuevaFactura.setMontoPago(MontoPago);
+                    NuevaFactura.setPorcentajeExtra(PorcentajeExtra);
+                    TablaFacturaServicio.ListaFacturas.add(NuevaFactura);
+                    JOptionPane.showMessageDialog(null, "Factura guardada con éxito");
+                    
+                    limpiarTexto(txtClave);
+                    limpiarTexto(txtServicio);
+                    limpiarTexto(txtMontoPago);
+                    limpiarTexto(txtPorcentajeExtra);
+
+                    int opcion = JOptionPane.showConfirmDialog(this, "¿Desea registrar otra Factura/Servicio?", "Mensaje", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if (opcion == JOptionPane.NO_OPTION) {//En el caso de que se haya seleccionado "Sí", la calculadora se cerrará.
+                        ventana_servicios Ventana_servicios = new ventana_servicios();
+                        this.dispose();
+                        Ventana_servicios.setVisible(true);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "La clave ya existe");
+                }
+
             }
-            else{
-                this.txtClave.setText("");
-                this.txtMontoPago.setText("");
-                this.txtPorcentajeExtra.setText("");
-                this.txtServicio.setText("");
-            }
-            
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Es necesario completar todos los campos correctamente\n");
+            JOptionPane.showMessageDialog(null, "Completa los campos correctamente\n");
+        } catch(NoSuchMethodError e2){
+            JOptionPane.showMessageDialog(this, "Ocurrió un error.");
         }
+        
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void txtClaveKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveKeyReleased
-        if(evt.getKeyCode() == 40){
+        if (evt.getKeyCode() == 40) {
             txtServicio.requestFocus();
         }
     }//GEN-LAST:event_txtClaveKeyReleased
 
     private void txtServicioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtServicioKeyReleased
-        switch(evt.getKeyCode()){
+        switch (evt.getKeyCode()) {
             case 40:
                 txtMontoPago.requestFocus();
                 break;
@@ -236,7 +246,7 @@ public class nuevo_fact_serv extends javax.swing.JFrame {
     }//GEN-LAST:event_txtServicioKeyReleased
 
     private void txtMontoPagoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoPagoKeyReleased
-        switch(evt.getKeyCode()){
+        switch (evt.getKeyCode()) {
             case 40:
                 txtPorcentajeExtra.requestFocus();
                 break;
@@ -247,7 +257,7 @@ public class nuevo_fact_serv extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMontoPagoKeyReleased
 
     private void txtPorcentajeExtraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcentajeExtraKeyReleased
-        if(evt.getKeyCode() == 38){
+        if (evt.getKeyCode() == 38) {
             txtMontoPago.requestFocus();
         }
     }//GEN-LAST:event_txtPorcentajeExtraKeyReleased
@@ -285,6 +295,8 @@ public class nuevo_fact_serv extends javax.swing.JFrame {
                 new nuevo_fact_serv().setVisible(true);
             }
         });
+    
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -301,5 +313,7 @@ public class nuevo_fact_serv extends javax.swing.JFrame {
     private javax.swing.JTextField txtServicio;
     // End of variables declaration//GEN-END:variables
 
-   
+private void limpiarTexto(JTextField campoTexto){
+        campoTexto.setText("");
+    }
 }
