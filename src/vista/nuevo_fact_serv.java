@@ -222,8 +222,6 @@ public class nuevo_fact_serv extends javax.swing.JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Completa los campos correctamente\n");
-        } catch(NoSuchMethodError e2){
-            JOptionPane.showMessageDialog(this, "Ocurrió un error.");
         }
         
     }//GEN-LAST:event_btGuardarActionPerformed

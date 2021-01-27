@@ -390,11 +390,11 @@ public class nuevo2_empleado extends javax.swing.JFrame {
                     this.dispose();
                     Ventana_empleados.setVisible(true);
                 }//Cierra la ventana
-                
-            }else{
+                else{
                     //Significa que ya se ha registrado un empleado del mismo tipo con la misma clave
                     JOptionPane.showMessageDialog(this, "Ya existe un empleado con la clave " + clave,"Error al intentar registrar empleado.",JOptionPane.WARNING_MESSAGE);
                 }
+            }
             
         }
         catch(NumberFormatException e1){
