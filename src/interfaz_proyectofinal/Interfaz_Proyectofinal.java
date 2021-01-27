@@ -7,6 +7,7 @@ package interfaz_proyectofinal;
 
 import Modelo.Empleado;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import vista.VistaPrincipal;
 
 /**
@@ -23,7 +24,6 @@ public class Interfaz_Proyectofinal {
     
     public static void main(String[] args) {
         VistaPrincipal ventana = new VistaPrincipal();
-        
         ventana.setVisible(true);
         
     }
