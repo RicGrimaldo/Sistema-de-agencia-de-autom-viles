@@ -20,7 +20,7 @@ public class Interfaz_Proyectofinal {
      */
     //ArrayList necesario para guardar los empleados
     public static ArrayList<Empleado> listaEmpleados = new ArrayList<Empleado>();        
-    
+    //Proyecto actualizado
     public static void main(String[] args) {
         VistaPrincipal ventana = new VistaPrincipal();
         

@@ -239,7 +239,7 @@ public class nueva_venta extends javax.swing.JFrame {
         try {
             Validador validar = new Validador();
             String cliente = txtCliente.getText();
-            String vendedor = CmbCarro.getSelectedItem().toString();
+            String vendedor = CmbEmpleados.getSelectedItem().toString();
             String clave = txtClave.getText();
             String modelo = CmbCarro.getSelectedItem().toString();
             double precio = 0.0;

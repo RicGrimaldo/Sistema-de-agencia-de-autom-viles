@@ -135,11 +135,11 @@ public class ver_fact_serv extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Clave", "Nombre del servicio", "Monto de pago", "% extra"
+                "Clave", "Nombre del servicio", "Monto de pago", "% extra", "Cantidad a pagar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true
+                false, true, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -301,7 +301,6 @@ public class ver_fact_serv extends javax.swing.JFrame {
     private javax.swing.JTable tblTablaFacturas;
     // End of variables declaration//GEN-END:variables
 private void llenarTabla(){
-   //TablaVentas.ListaVentas.add(Pedidos); 
    for(int i=0; i<TablaFacturaServicio.ListaFacturas.size();i++){
        Object[] arreglo = new Object[6];
        FacturaServicio nuevo = TablaFacturaServicio.ListaFacturas.get(i);
@@ -309,6 +308,7 @@ private void llenarTabla(){
        arreglo[1] = nuevo.getNombreServicio();
        arreglo[2] = nuevo.getMontoPago();
        arreglo[3] = nuevo.getPorcentajeExtra();
+       arreglo[4] = nuevo.cantPagar();
        modelo.addRow(arreglo);
    }
 }

@@ -207,7 +207,7 @@
                     <Column editable="true" title="Nombre vendedor" type="java.lang.Object"/>
                     <Column editable="true" title="Modelo del carro" type="java.lang.Object"/>
                     <Column editable="true" title="Precio" type="java.lang.Object"/>
-                    <Column editable="true" title="Color" type="java.lang.Object"/>
+                    <Column editable="false" title="Color" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -249,6 +249,7 @@
                 </Property>
               </Properties>
               <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblTablaVentasMouseReleased"/>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tblTablaVentasKeyReleased"/>
               </Events>
             </Component>

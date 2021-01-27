@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class ver_ventas extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
+    int columna;
 
     public ver_ventas() {
         initComponents();
@@ -141,7 +142,20 @@ public class ver_ventas extends javax.swing.JFrame {
             new String [] {
                 "Clave", "Nombre cliente", "Nombre vendedor", "Modelo del carro", "Precio", "Color"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblTablaVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblTablaVentasMouseReleased(evt);
+            }
+        });
         tblTablaVentas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tblTablaVentasKeyReleased(evt);
@@ -227,6 +241,7 @@ public class ver_ventas extends javax.swing.JFrame {
         int fila = tblTablaVentas.getSelectedRow();
         ColoresCarro objColoresCarro = new ColoresCarro();
         Ventas nuevo = TablaVentas.ListaVentas.get(fila);
+        String ModeloOriginal = modelo.getValueAt(fila, 3).toString();
         if (evt.getKeyCode() == 10) {
             String Carromodelo = modelo.getValueAt(fila, 3).toString();
             int posicion = objColoresCarro.modelosCarro.indexOf(Carromodelo);
@@ -235,28 +250,57 @@ public class ver_ventas extends javax.swing.JFrame {
             Collections.addAll(coloresList, colores);
             String color = modelo.getValueAt(fila, 5).toString();
             if (objColoresCarro.modelosCarro.contains(Carromodelo)) {
-                int posicionColor = JOptionPane.showOptionDialog(null, "Escoge un color", "Color", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, colores, colores[0]);
-                color = colores[posicionColor];
-                if (coloresList.contains(color)) {
-                    nuevo.setClave(modelo.getValueAt(fila, 0).toString());
-                    nuevo.setNombreComprador(modelo.getValueAt(fila, 1).toString());
-                    nuevo.setNombreVendedor(modelo.getValueAt(fila, 2).toString());
-                    nuevo.setPrecioAuto(modelo.getValueAt(fila, 4).toString());
+                if (columna == 3) {
+                    int posicionColor = JOptionPane.showOptionDialog(null, "Escoge un color", "Color", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, colores, colores[0]);
+                    color = colores[posicionColor];
                     nuevo.setModeloCarro(Carromodelo);
                     nuevo.setColorAuto(color);
-                    llenarTabla();
-                    JOptionPane.showMessageDialog(null, "Se ha modificado con exito ", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                }else{
-                    JOptionPane.showMessageDialog(null, "El color ingresado no es valido", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }
+                nuevo.setClave(modelo.getValueAt(fila, 0).toString());
+                nuevo.setNombreComprador(modelo.getValueAt(fila, 1).toString());
+                nuevo.setNombreVendedor(modelo.getValueAt(fila, 2).toString());
+                nuevo.setPrecioAuto(modelo.getValueAt(fila, 4).toString());
+                llenarTabla();
+                JOptionPane.showMessageDialog(null, "Se ha modificado con exito ", "Exito", JOptionPane.INFORMATION_MESSAGE);
 
-                
             } else {
                 JOptionPane.showMessageDialog(null, "El modelo ingresado no es valido", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
 
         }
     }//GEN-LAST:event_tblTablaVentasKeyReleased
+
+    private void tblTablaVentasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTablaVentasMouseReleased
+        System.out.println("" + evt.getClickCount());
+        System.out.println("" + tblTablaVentas.getSelectedColumn());
+        columna = tblTablaVentas.getSelectedColumn();
+        int fila = tblTablaVentas.getSelectedRow();
+        ColoresCarro objColoresCarro = new ColoresCarro();
+        Ventas nuevo = TablaVentas.ListaVentas.get(fila);
+        String ModeloOriginal = modelo.getValueAt(fila, 3).toString();
+        if (evt.getClickCount() == 2) {
+            String Carromodelo = modelo.getValueAt(fila, 3).toString();
+            int posicion = objColoresCarro.modelosCarro.indexOf(Carromodelo);
+            String[] colores = objColoresCarro.arreglocolores[posicion];
+            ArrayList<String> coloresList = new ArrayList<>();
+            Collections.addAll(coloresList, colores);
+            String color = modelo.getValueAt(fila, 5).toString();
+            if (objColoresCarro.modelosCarro.contains(Carromodelo)) {
+                if (columna == 5) {
+                    int posicionColor = JOptionPane.showOptionDialog(null, "Escoge un color", "Color", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, colores, colores[0]);
+                    color = colores[posicionColor];
+                    nuevo.setColorAuto(color);
+                    llenarTabla();
+                    JOptionPane.showMessageDialog(null, "Se ha modificado con exito ", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "El modelo ingresado no es valido", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+
+        }
+
+    }//GEN-LAST:event_tblTablaVentasMouseReleased
 
     /**
      * @param args the command line arguments
@@ -306,7 +350,7 @@ public class ver_ventas extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 private void llenarTabla() {
         //TablaVentas.ListaVentas.add(Pedidos); 
-        for(int i=0;i < modelo.getRowCount();i++){
+        for (int i = 0; i < modelo.getRowCount(); i++) {
             modelo.removeRow(0);
         }
         for (int i = 0; i < TablaVentas.ListaVentas.size(); i++) {
